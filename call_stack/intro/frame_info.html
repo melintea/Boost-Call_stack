@@ -1,0 +1,61 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<title>Class call_frame_info</title>
+<link rel="stylesheet" href="../../boostbook.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+<link rel="home" href="../../index.html" title="Chapter&#160;1.&#160;Boost.Call_stack">
+<link rel="up" href="../intro.html" title="Introduction">
+<link rel="prev" href="frame_formatters.html" title="Call Frame Formatters">
+<link rel="next" href="symbol_info.html" title="Class symbol_info">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="spirit-nav">
+<a accesskey="p" href="frame_formatters.html"><img src="../../images/prev.png" alt="Prev"></a><a accesskey="u" href="../intro.html"><img src="../../images/up.png" alt="Up"></a><a accesskey="h" href="../../index.html"><img src="../../images/home.png" alt="Home"></a><a accesskey="n" href="symbol_info.html"><img src="../../images/next.png" alt="Next"></a>
+</div>
+<div class="section">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="call_stack.intro.frame_info"></a><a name="lnk_frame_info"></a><a class="link" href="frame_info.html" title="Class call_frame_info">Class
+      call_frame_info</a>
+</h3></div></div></div>
+<p>
+        <code class="computeroutput"><a class="link" href="../../boost/call_stack/call_frame_info.html" title="Class template call_frame_info">call_frame_info</a></code>
+        binds together:
+      </p>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<li class="listitem">
+            <a class="link" href="symbol_resolvers.html#lnk_symbol_resolvers">a symbol resolver</a>.
+          </li>
+<li class="listitem">
+            <a class="link" href="frame_formatters.html#lnk_frame_formatters">a frame formatter</a>.
+          </li>
+</ul></div>
+<p>
+</p>
+<pre class="programlisting"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">call_stack</span><span class="special">::</span><span class="identifier">call_stack</span><span class="special">&lt;</span><span class="number">40</span><span class="special">&gt;</span> <span class="identifier">astack</span><span class="special">(</span><span class="keyword">true</span><span class="special">);</span>
+<span class="keyword">for</span> <span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">i</span> <span class="special">=</span> <span class="number">0</span><span class="special">;</span> <span class="identifier">i</span> <span class="special">&lt;</span> <span class="identifier">astack</span><span class="special">.</span><span class="identifier">size</span><span class="special">();</span> <span class="special">++</span><span class="identifier">i</span><span class="special">)</span>
+<span class="special">{</span>
+    <span class="identifier">boost</span><span class="special">::</span><span class="identifier">call_stack</span><span class="special">::</span><span class="identifier">call_frame</span> <span class="identifier">aframe</span><span class="special">(</span> <span class="identifier">astack</span><span class="special">[</span><span class="identifier">i</span><span class="special">]</span> <span class="special">);</span>
+    <span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">call_stack</span><span class="special">::</span><span class="identifier">call_frame_info</span><span class="special">&lt;</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">call_stack</span><span class="special">::</span><span class="identifier">extended_symbol_resolver</span>    <span class="comment">// extended_symbol_resolver, basic_symbol_resolver or null_symbol_resolver</span>
+                                                   <span class="special">,</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">call_stack</span><span class="special">::</span><span class="identifier">fancy_call_frame_formatter</span>  <span class="comment">// fancy_call_frame_formatter or terse_call_frame_formatter</span>
+                                                   <span class="special">&gt;</span> <span class="special">(</span><span class="identifier">aframe</span><span class="special">)</span>
+              <span class="special">&lt;&lt;</span> <span class="string">"\n"</span>
+              <span class="special">;</span>
+<span class="special">}</span>
+</pre>
+<p>
+      </p>
+</div>
+<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
+<td align="left"></td>
+<td align="right"><div class="copyright-footer">Copyright &#169; 2013 Aurelian Melinte<p>
+        Distributed under the Boost Software License, Version 1.0 (See <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>).
+      </p>
+</div></td>
+</tr></table>
+<hr>
+<div class="spirit-nav">
+<a accesskey="p" href="frame_formatters.html"><img src="../../images/prev.png" alt="Prev"></a><a accesskey="u" href="../intro.html"><img src="../../images/up.png" alt="Up"></a><a accesskey="h" href="../../index.html"><img src="../../images/home.png" alt="Home"></a><a accesskey="n" href="symbol_info.html"><img src="../../images/next.png" alt="Next"></a>
+</div>
+</body>
+</html>

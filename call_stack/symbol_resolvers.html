@@ -1,0 +1,58 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<title>Class symbol_resolver</title>
+<link rel="stylesheet" href="../boostbook.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+<link rel="home" href="../index.html" title="Chapter&#160;1.&#160;Boost.Call_stack">
+<link rel="up" href="../index.html" title="Chapter&#160;1.&#160;Boost.Call_stack">
+<link rel="prev" href="symbol_formatters.html" title="Symbol Formatters">
+<link rel="next" href="call_stack_info.html" title="Class call_stack_info">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="spirit-nav">
+<a accesskey="p" href="symbol_formatters.html"><img src="../images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../images/home.png" alt="Home"></a><a accesskey="n" href="call_stack_info.html"><img src="../images/next.png" alt="Next"></a>
+</div>
+<div class="section">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="call_stack.symbol_resolvers"></a><a name="lnk_symbol_resolvers"></a><a class="link" href="symbol_resolvers.html" title="Class symbol_resolver">Class
+    symbol_resolver</a>
+</h2></div></div></div>
+<p>
+      There are three symbol resolvers in the library:
+    </p>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<li class="listitem">
+          <code class="computeroutput"><a class="link" href="../boost/call_stack/null_symbol_resolver.html" title="Type definition null_symbol_resolver">null_symbol_resolver</a></code>:
+          Does nothing. This could be useful when tracing call stacks in difficult
+          situations, such as low memory conditions. Typically, resolving symols
+          implies memory allocations by the platform API used to resolve symbols.
+        </li>
+<li class="listitem">
+          <code class="computeroutput"><a class="link" href="../boost/call_stack/basic_symbol_resolver.html" title="Type definition basic_symbol_resolver">basic_symbol_resolver</a></code>:
+          Resolve symbols to the extent that the API used is installed by default
+          on the platform. For instance, for GCC that would bean API restricted to
+          libc.lib.
+        </li>
+<li class="listitem">
+          <code class="computeroutput"><a class="link" href="../header/boost/call_stack/symbol_hpp.html#boost.call_stack.extended_symbol_resolver">extended_symbol_resolver</a></code>:
+          Resolve symbols with the help of extra libraries. This could add link dependencies
+          to libraries that are not installed. For instance, for GCC, libbfd is used
+          to resolve file names and line numbers. Define <code class="literal">BOOST_CALL_STACK_NO_OPTIONAL_LIBS</code>
+          to cut these dependencies off.
+        </li>
+</ul></div>
+</div>
+<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
+<td align="left"></td>
+<td align="right"><div class="copyright-footer">Copyright &#169; 2013 Aurelian Melinte<p>
+        Distributed under the Boost Software License, Version 1.0 See the <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">license</a> and the <a href="http://www.boost.org/users/license.html" target="_top">license FAQ</a>.
+      </p>
+</div></td>
+</tr></table>
+<hr>
+<div class="spirit-nav">
+<a accesskey="p" href="symbol_formatters.html"><img src="../images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../images/home.png" alt="Home"></a><a accesskey="n" href="call_stack_info.html"><img src="../images/next.png" alt="Next"></a>
+</div>
+</body>
+</html>

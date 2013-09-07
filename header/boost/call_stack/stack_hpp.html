@@ -1,0 +1,54 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<title>Header &lt;boost/call_stack/stack.hpp&gt;</title>
+<link rel="stylesheet" href="../../../boostbook.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+<link rel="home" href="../../../index.html" title="Chapter&#160;1.&#160;Boost.Call_stack">
+<link rel="up" href="../../../call_stack/reference.html" title="Reference">
+<link rel="prev" href="../../../boost/call_stack/null_frame.html" title="Global null_frame">
+<link rel="next" href="../../../boost/call_stack/call_stack.html" title="Class template call_stack">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="spirit-nav">
+<a accesskey="p" href="../../../boost/call_stack/null_frame.html"><img src="../../../images/prev.png" alt="Prev"></a><a accesskey="u" href="../../../call_stack/reference.html"><img src="../../../images/up.png" alt="Up"></a><a accesskey="h" href="../../../index.html"><img src="../../../images/home.png" alt="Home"></a><a accesskey="n" href="../../../boost/call_stack/call_stack.html"><img src="../../../images/next.png" alt="Next"></a>
+</div>
+<div class="section">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="header.boost.call_stack.stack_hpp"></a>Header &lt;<a href="../../../../../../../boost/call_stack/stack.hpp" target="_top">boost/call_stack/stack.hpp</a>&gt;</h3></div></div></div>
+<pre class="synopsis"><span class="keyword">namespace</span> <span class="identifier">boost</span> <span class="special">{</span>
+  <span class="keyword">namespace</span> <span class="identifier">call_stack</span> <span class="special">{</span>
+    <span class="keyword">template</span><span class="special">&lt;</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> MaxDepth<span class="special">&gt;</span> <span class="keyword">class</span> <a class="link" href="../../../boost/call_stack/call_stack.html" title="Class template call_stack">call_stack</a><span class="special">;</span>
+    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> CallStack<span class="special">,</span> <span class="keyword">typename</span> AddrResolver<span class="special">,</span> 
+             <span class="keyword">typename</span> OutputFormatter<span class="special">&gt;</span> 
+      <span class="keyword">class</span> <a class="link" href="../../../boost/call_stack/call_stack_info.html" title="Class template call_stack_info">call_stack_info</a><span class="special">;</span>
+    <span class="keyword">template</span><span class="special">&lt;</span><span class="identifier">size_t</span> Size<span class="special">&gt;</span> 
+      <span class="keyword">void</span> <a name="boost.call_stack.swap_id327355"></a><span class="identifier">swap</span><span class="special">(</span><a class="link" href="../../../boost/call_stack/call_stack.html" title="Class template call_stack">call_stack</a><span class="special">&lt;</span> <span class="identifier">Size</span> <span class="special">&gt;</span> <span class="special">&amp;</span> left<span class="special">,</span> <a class="link" href="../../../boost/call_stack/call_stack.html" title="Class template call_stack">call_stack</a><span class="special">&lt;</span> <span class="identifier">Size</span> <span class="special">&gt;</span> <span class="special">&amp;</span> right<span class="special">)</span><span class="special">;</span>
+    <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> CallStack<span class="special">,</span> <span class="keyword">typename</span> AddrResolver<span class="special">,</span> 
+             <span class="keyword">typename</span> OutputFormatter<span class="special">&gt;</span> 
+      <span class="keyword">void</span> <a name="boost.call_stack.swap_id327382"></a><span class="identifier">swap</span><span class="special">(</span><a class="link" href="../../../boost/call_stack/call_stack_info.html" title="Class template call_stack_info">call_stack_info</a><span class="special">&lt;</span> <span class="identifier">CallStack</span><span class="special">,</span> <span class="identifier">AddrResolver</span><span class="special">,</span> <span class="identifier">OutputFormatter</span> <span class="special">&gt;</span> <span class="special">&amp;</span> left<span class="special">,</span> 
+                <a class="link" href="../../../boost/call_stack/call_stack_info.html" title="Class template call_stack_info">call_stack_info</a><span class="special">&lt;</span> <span class="identifier">CallStack</span><span class="special">,</span> <span class="identifier">AddrResolver</span><span class="special">,</span> <span class="identifier">OutputFormatter</span> <span class="special">&gt;</span> <span class="special">&amp;</span> right<span class="special">)</span><span class="special">;</span>
+  <span class="special">}</span>
+<span class="special">}</span><span class="keyword">namespace</span> <span class="identifier">std</span> <span class="special">{</span>
+  <span class="keyword">template</span><span class="special">&lt;</span><span class="identifier">size_t</span> Size<span class="special">&gt;</span> 
+    <span class="keyword">void</span> <a name="std.swap_id327417"></a><span class="identifier">swap</span><span class="special">(</span><a class="link" href="../../../boost/call_stack/call_stack.html" title="Class template call_stack">boost::call_stack::call_stack</a><span class="special">&lt;</span> <span class="identifier">Size</span> <span class="special">&gt;</span> <span class="special">&amp;</span> left<span class="special">,</span> 
+              <a class="link" href="../../../boost/call_stack/call_stack.html" title="Class template call_stack">boost::call_stack::call_stack</a><span class="special">&lt;</span> <span class="identifier">Size</span> <span class="special">&gt;</span> <span class="special">&amp;</span> right<span class="special">)</span><span class="special">;</span>
+  <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> CallStack<span class="special">,</span> <span class="keyword">typename</span> AddrResolver<span class="special">,</span> 
+           <span class="keyword">typename</span> OutputFormatter<span class="special">&gt;</span> 
+    <span class="keyword">void</span> <a name="std.swap_id327445"></a><span class="identifier">swap</span><span class="special">(</span><a class="link" href="../../../boost/call_stack/call_stack_info.html" title="Class template call_stack_info">boost::call_stack::call_stack_info</a><span class="special">&lt;</span> <span class="identifier">CallStack</span><span class="special">,</span> <span class="identifier">AddrResolver</span><span class="special">,</span> <span class="identifier">OutputFormatter</span> <span class="special">&gt;</span> <span class="special">&amp;</span> left<span class="special">,</span> 
+              <a class="link" href="../../../boost/call_stack/call_stack_info.html" title="Class template call_stack_info">boost::call_stack::call_stack_info</a><span class="special">&lt;</span> <span class="identifier">CallStack</span><span class="special">,</span> <span class="identifier">AddrResolver</span><span class="special">,</span> <span class="identifier">OutputFormatter</span> <span class="special">&gt;</span> <span class="special">&amp;</span> right<span class="special">)</span><span class="special">;</span>
+<span class="special">}</span></pre>
+</div>
+<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
+<td align="left"></td>
+<td align="right"><div class="copyright-footer">Copyright &#169; 2013 Aurelian Melinte<p>
+        Distributed under the Boost Software License, Version 1.0 See the <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">license</a> and the <a href="http://www.boost.org/users/license.html" target="_top">license FAQ</a>.
+      </p>
+</div></td>
+</tr></table>
+<hr>
+<div class="spirit-nav">
+<a accesskey="p" href="../../../boost/call_stack/null_frame.html"><img src="../../../images/prev.png" alt="Prev"></a><a accesskey="u" href="../../../call_stack/reference.html"><img src="../../../images/up.png" alt="Up"></a><a accesskey="h" href="../../../index.html"><img src="../../../images/home.png" alt="Home"></a><a accesskey="n" href="../../../boost/call_stack/call_stack.html"><img src="../../../images/next.png" alt="Next"></a>
+</div>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<title>Class call_frame</title>
+<link rel="stylesheet" href="../../boostbook.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+<link rel="home" href="../../index.html" title="Chapter&#160;1.&#160;Boost.Call_stack">
+<link rel="up" href="../../header/boost/call_stack/frame_hpp.html" title="Header &lt;boost/call_stack/frame.hpp&gt;">
+<link rel="prev" href="../../header/boost/call_stack/frame_hpp.html" title="Header &lt;boost/call_stack/frame.hpp&gt;">
+<link rel="next" href="call_frame_info.html" title="Class template call_frame_info">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="spirit-nav">
+<a accesskey="p" href="../../header/boost/call_stack/frame_hpp.html"><img src="../../images/prev.png" alt="Prev"></a><a accesskey="u" href="../../header/boost/call_stack/frame_hpp.html"><img src="../../images/up.png" alt="Up"></a><a accesskey="h" href="../../index.html"><img src="../../images/home.png" alt="Home"></a><a accesskey="n" href="call_frame_info.html"><img src="../../images/next.png" alt="Next"></a>
+</div>
+<div class="refentry">
+<a name="boost.call_stack.call_frame"></a><div class="titlepage"></div>
+<div class="refnamediv">
+<h2><span class="refentrytitle">Class call_frame</span></h2>
+<p>boost::call_stack::call_frame</p>
+</div>
+<h2 xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="refsynopsisdiv-title">Synopsis</h2>
+<div xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="refsynopsisdiv"><pre class="synopsis"><span class="comment">// In header: &lt;<a class="link" href="../../header/boost/call_stack/frame_hpp.html" title="Header &lt;boost/call_stack/frame.hpp&gt;">boost/call_stack/frame.hpp</a>&gt;
+
+</span>
+<span class="keyword">class</span> <a class="link" href="call_frame.html" title="Class call_frame">call_frame</a> <span class="special">:</span> <span class="keyword">protected</span> <span class="identifier">call_frame_impl</span> <span class="special">{</span>
+<span class="keyword">public</span><span class="special">:</span>
+  <span class="comment">// <a class="link" href="call_frame.html#boost.call_stack.call_frameconstruct-copy-destruct">construct/copy/destruct</a></span>
+  <a class="link" href="call_frame.html#id326396-bb"><span class="identifier">call_frame</span></a><span class="special">(</span><span class="special">)</span><span class="special">;</span>
+  <a class="link" href="call_frame.html#id326398-bb"><span class="identifier">call_frame</span></a><span class="special">(</span><span class="keyword">const</span> <span class="identifier">call_frame_impl</span> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
+  <a class="link" href="call_frame.html#id326404-bb"><span class="identifier">call_frame</span></a><span class="special">(</span><span class="keyword">const</span> <a class="link" href="call_frame.html" title="Class call_frame">call_frame</a> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
+  call_frame&amp; <a class="link" href="call_frame.html#id326413-bb"><span class="keyword">operator</span><span class="special">=</span></a><span class="special">(</span><a class="link" href="call_frame.html" title="Class call_frame">call_frame</a><span class="special">)</span><span class="special">;</span>
+
+  <span class="comment">// <a class="link" href="call_frame.html#id326354-bb">public member functions</a></span>
+  <span class="keyword">void</span> <a class="link" href="call_frame.html#id326357-bb"><span class="identifier">swap</span></a><span class="special">(</span><a class="link" href="call_frame.html" title="Class call_frame">call_frame</a> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
+  <span class="keyword">const</span> <span class="identifier">address_type</span> <a class="link" href="call_frame.html#id326370-bb"><span class="identifier">addr</span></a><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span>
+  <span class="keyword">bool</span> <a class="link" href="call_frame.html#id326383-bb"><span class="keyword">operator</span><span class="special">==</span></a><span class="special">(</span><a class="link" href="call_frame.html" title="Class call_frame">call_frame</a> <span class="keyword">const</span> <span class="special">&amp;</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span>
+<span class="special">}</span><span class="special">;</span></pre></div>
+<div class="refsect1">
+<a name="id910381"></a><h2>Description</h2>
+<p>Platform agnostic call frame. </p>
+<div class="refsect2">
+<a name="id910387"></a><h3>
+<a name="boost.call_stack.call_frameconstruct-copy-destruct"></a><code class="computeroutput">call_frame</code> 
+        public
+       construct/copy/destruct</h3>
+<div class="orderedlist"><ol class="orderedlist" type="1">
+<li class="listitem"><pre class="literallayout"><a name="id326396-bb"></a><span class="identifier">call_frame</span><span class="special">(</span><span class="special">)</span><span class="special">;</span></pre></li>
+<li class="listitem"><pre class="literallayout"><a name="id326398-bb"></a><span class="identifier">call_frame</span><span class="special">(</span><span class="keyword">const</span> <span class="identifier">call_frame_impl</span> <span class="special">&amp;</span> frm<span class="special">)</span><span class="special">;</span></pre></li>
+<li class="listitem"><pre class="literallayout"><a name="id326404-bb"></a><span class="identifier">call_frame</span><span class="special">(</span><span class="keyword">const</span> <a class="link" href="call_frame.html" title="Class call_frame">call_frame</a> <span class="special">&amp;</span> other<span class="special">)</span><span class="special">;</span></pre></li>
+<li class="listitem"><pre class="literallayout">call_frame&amp; <a name="id326413-bb"></a><span class="keyword">operator</span><span class="special">=</span><span class="special">(</span><a class="link" href="call_frame.html" title="Class call_frame">call_frame</a> other<span class="special">)</span><span class="special">;</span></pre></li>
+</ol></div>
+</div>
+<div class="refsect2">
+<a name="id910530"></a><h3>
+<a name="id326354-bb"></a><code class="computeroutput">call_frame</code> public member functions</h3>
+<div class="orderedlist"><ol class="orderedlist" type="1">
+<li class="listitem"><pre class="literallayout"><span class="keyword">void</span> <a name="id326357-bb"></a><span class="identifier">swap</span><span class="special">(</span><a class="link" href="call_frame.html" title="Class call_frame">call_frame</a> <span class="special">&amp;</span> other<span class="special">)</span><span class="special">;</span></pre></li>
+<li class="listitem">
+<pre class="literallayout"><span class="keyword">const</span> <span class="identifier">address_type</span> <a name="id326370-bb"></a><span class="identifier">addr</span><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span></pre>
+<p>
+</p>
+<div class="variablelist"><table border="0" class="variablelist compact">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody><tr>
+<td><p><span class="term">Returns:</span></p></td>
+<td><p>an opaque address useable by symbol resolvers. </p></td>
+</tr></tbody>
+</table></div>
+</li>
+<li class="listitem"><pre class="literallayout"><span class="keyword">bool</span> <a name="id326383-bb"></a><span class="keyword">operator</span><span class="special">==</span><span class="special">(</span><a class="link" href="call_frame.html" title="Class call_frame">call_frame</a> <span class="keyword">const</span> <span class="special">&amp;</span> other<span class="special">)</span> <span class="keyword">const</span><span class="special">;</span></pre></li>
+</ol></div>
+</div>
+</div>
+</div>
+<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
+<td align="left"></td>
+<td align="right"><div class="copyright-footer">Copyright &#169; 2013 Aurelian Melinte<p>
+        Distributed under the Boost Software License, Version 1.0 See the <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">license</a> and the <a href="http://www.boost.org/users/license.html" target="_top">license FAQ</a>.
+      </p>
+</div></td>
+</tr></table>
+<hr>
+<div class="spirit-nav">
+<a accesskey="p" href="../../header/boost/call_stack/frame_hpp.html"><img src="../../images/prev.png" alt="Prev"></a><a accesskey="u" href="../../header/boost/call_stack/frame_hpp.html"><img src="../../images/up.png" alt="Up"></a><a accesskey="h" href="../../index.html"><img src="../../images/home.png" alt="Home"></a><a accesskey="n" href="call_frame_info.html"><img src="../../images/next.png" alt="Next"></a>
+</div>
+</body>
+</html>
