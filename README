@@ -1,2 +1,10 @@
-Doc at: http://melintea.github.io/Boost-Call_stack/index.html
+---
+Boost.Call_stack
+---
+
+A collection of call stack utilities built around [http://www.boost.org boost].
+
+# Documentation
+
+See http://melintea.github.io/Boost-Call_stack/index.html.
 
