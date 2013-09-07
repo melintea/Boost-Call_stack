@@ -1,10 +1,6 @@
----
-Boost.Call_stack
----
+Boost.Call_stack: a collection of call stack utilities built around http://www.boost.org. 
 
-A collection of call stack utilities built around [http://www.boost.org boost].
+Disclaimer: this is not part of the boost libraries collection.
 
-# Documentation
-
-See http://melintea.github.io/Boost-Call_stack/index.html.
+Documentation: http://melintea.github.io/Boost-Call_stack/index.html.
 
