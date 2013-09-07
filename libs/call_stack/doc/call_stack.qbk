@@ -1,0 +1,244 @@
+
+[library Boost.Call_stack
+    [quickbook 1.5]
+    [authors [Melinte (ame01@gmx.net), Aurelian ]]
+    [copyright 2013 Aurelian Melinte]
+    [id call_stack]
+    [dirname call_stack]
+    [purpose 
+        Call stack utilities.
+    ]
+    [license
+        Distributed under the Boost Software License, Version 1.0
+        See the [@http://www.boost.org/LICENSE_1_0.txt license] and 
+		the [@http://www.boost.org/users/license.html license FAQ]. 
+    ]
+	[source-mode c++]
+]
+
+[template super[x]'''<superscript>'''[x]'''</superscript>''']
+[template sub[x]'''<subscript>'''[x]'''</subscript>''']
+
+[/ Examples]
+[import ../example/default.cpp]
+[import ../example/quick.cpp]
+[import ../example/exception.cpp]
+[import ../example/frame.cpp]
+[import ../example/null_terse.cpp]
+
+
+[#lnk_disclaimer]
+[section:disclaimer Disclaimer]
+
+This library is [*not] part of the [@http://www.boost.org Boost libraries collection].
+
+[endsect]
+
+
+[#lnk_intro]
+[section:intro Introduction]
+
+[*Boost.Call_stack] is a collection of utilities to collect 
+[@http://en.wikipedia.org/wiki/Call_stack runtime call stacks] and display them 
+in a human-readable form.  Output in a wide character format is not directly 
+supported. 
+
+Broadly, the library contains: 
+
+* A call stack capture wrapper.
+* Tools for symbol resolution with various degrees of detail.
+* Formatters to display above information in a human-readable form.
+
+[#lnk_introduction_building]
+[section:introduction_building Building Boost.Call_stack]
+
+[*Boost.Call_stack] is a header only library. Include your Boost header directory in your
+compiler include path, as well as the path to the [*Boost.Call_stack] headers.
+
+[endsect]
+
+[#lnk_tested_compilers]
+[section:tested_compilers Compilers and platforms]
+
+[*Boost.Call_stack] is C++98 code. It is known to work with:
+
+*  Visual C++ 7.1 (2003) and later.
+*  GCC 4.7 and later.
+
+[endsect]
+
+[#lnk_dependencies]
+[section:dependencies Dependencies]
+
+[h4 All Platforms]
+* Boost (verified with version 1.51): 
+	* Boost.Array
+    * Boost.Config
+	* Boost.Date_Time
+	* Boost.Move
+	* Boost.Smart_ptr
+	* Boost.StaticAssert
+	* Boost.Test 
+    * [@http://www.boost.org/libs/thread/index.html Boost.Thread]
+	* Boost.TypeTraits
+	* Boost.Utility
+
+[h4 Platform specific]
+* Windows
+    * Links with [^DbgHelp.dll].
+* GCC
+    * Links with [^libbfd] by default. Optional.
+
+Define [^BOOST_CALL_STACK_NO_OPTIONAL_LIBS] to cut dependencies on libraries that 
+are not installed by default on the platform (optional libraries).  This could 
+affect the level of detail of the functionality of this library.  By default,
+optional libraries are used and linked with. 
+
+For instance, this will cut the dependency on [^libbfd] on GCC platforms and 
+some symbols will not resolve properly, nor would line numbers be available.  
+
+[endsect]
+
+[#lnk_download]
+[section:download Download]
+
+* Online documentation: http://melintea.github.io/Boost-Call_stack/index.html
+* Code repository: https://github.com/melintea/Boost-Call_stack
+
+[endsect]
+
+[#lnk_quick_guide]
+[section:quick_guide The Quick Guide]
+
+[default]
+
+[quick]
+
+[exception]
+
+[endsect]
+
+[endsect] [/ intro]
+[/ -------------------------------------------------------------------------- ]
+
+
+[#lnk_call_stack]
+[section:class_call_stack Class call_stack]
+[h4 Description]
+
+[classref boost::call_stack::call_stack call_stack] is a collection of 
+[classref boost::call_stack::call_frame call_frame]s. 
+
+[h4 Synopsis]
+[h4 Example]
+
+[endsect]
+
+[#lnk_call_frame]
+[section:call_frame Class call_frame]
+
+[classref boost::call_stack::call_frame call_frame] holds the information of a 
+[@http://en.wikipedia.org/wiki/Call_stack call stack frame]. 
+Use a [link lnk_frame_info call_frame_info] to print it.
+
+[frame]
+
+[endsect]
+
+[#lnk_frame_formatters]
+[section:frame_formatters Call Frame Formatters]
+
+A [classref boost::call_stack::call_frame call_frame] formatter dictates how the 
+symbol information is to be printed to an output stream. The library supplies 
+two symbol formatters:
+
+* [classref boost::call_stack::terse_symbol_formatter terse_symbol_formatter]
+* [classref boost::call_stack::fancy_symbol_formatter fancy_symbol_formatter]
+
+[null_terse]
+[null_terse_doc]
+
+[endsect]
+
+[#lnk_frame_info]
+[section:frame_info Class call_frame_info]
+
+[classref boost::call_stack::call_frame_info call_frame_info] binds together:
+
+* [link lnk_symbol_resolvers a symbol resolver].
+* [link lnk_frame_formatters a frame formatter].
+
+[frame]
+
+[endsect]
+
+
+[#lnk_symbol_info]
+[section:symbol_info Class symbol_info]
+
+[classref boost::call_stack::symbol_info symbol_info] binds together:
+
+* [link lnk_symbol_resolvers a symbol resolver].
+* [link lnk_symbol_formatters a symbol formatter].
+
+[endsect]
+
+
+[#lnk_symbol_formatters]
+[section:symbol_formatters Symbol Formatters]
+
+A symbol formatter dictates how the symbol information is to be printed to an
+output stream. The library supplies two symbol formatters:
+
+* [classref boost::call_stack::terse_symbol_formatter terse_symbol_formatter]
+* [classref boost::call_stack::fancy_symbol_formatter fancy_symbol_formatter]
+
+[endsect]
+
+
+[#lnk_symbol_resolvers]
+[section:symbol_resolvers Class symbol_resolver]
+
+There are three symbol resolvers in the library:
+
+* [classref boost::call_stack::null_symbol_resolver null_symbol_resolver]: 
+  Does nothing. This could be useful when tracing call stacks in difficult 
+  situations, such as low memory conditions. Typically, resolving symols 
+  implies memory allocations by the platform API used to resolve symbols.
+  
+* [classref boost::call_stack::basic_symbol_resolver basic_symbol_resolver]: 
+  Resolve symbols to the extent that the API used is installed by default 
+  on the platform. For instance, for GCC that would bean API restricted 
+  to libc.lib.
+  
+* [classref boost::call_stack::extended_symbol_resolver extended_symbol_resolver]: 
+  Resolve symbols with the help of extra libraries. This could add link 
+  dependencies to libraries that are not installed. For instance, for 
+  GCC, libbfd is used to resolve file names and line numbers.
+  Define [^BOOST_CALL_STACK_NO_OPTIONAL_LIBS] to cut these dependencies
+  off.
+
+[endsect]
+
+
+[#lnk_call_stack_info]
+[section:call_stack_info Class call_stack_info]
+[endsect]
+
+[#lnk_call_stack_init]
+[section:call_stack_init boost::call_stack::init and boost::call_stack::shutdown]
+[endsect]
+
+[/ -------------------------------------------------------------------------- ]
+
+
+[#lnk_revision_history]
+[section:revision_history Revision History]
+
+Rev hist.
+
+[endsect]
+
+
+'''<index/>'''
+[xinclude autodoc.xml]

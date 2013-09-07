@@ -1,0 +1,55 @@
+# Boost.Call_stack
+# Use: bjam -d+2
+#
+# Copyright (c) 2013 Aurelian Melinte
+#
+# Distributed under the Boost Software License, Version 1.0.
+# (See http://www.boost.org/LICENSE_1_0.txt)
+
+# https://svn.boost.org/trac/boost/wiki/BoostDocs/GettingStarted
+
+# Quickbook
+# -----------------------------------------------------------------------------
+
+using xsltproc ;
+using boostbook ;
+using doxygen ;
+using quickbook ;
+using auto-index ;
+
+xml call_stack
+    :
+        call_stack.qbk
+    ;
+
+boostbook standalone
+    :
+        call_stack
+    :
+        <xsl:param>boost.root=../../../..
+        <xsl:param>html.stylesheet=boostbook.css
+        <xsl:param>toc.max.depth=2
+        <xsl:param>toc.section.depth=4
+        <xsl:param>chunk.section.depth=2
+        <dependency>autodoc
+		
+        <auto-index>on
+        <auto-index-verbose>on
+        <auto-index-script>index.idx
+        <auto-index-prefix>../../../
+        <quickbook-define>enable_index
+		
+        <format>html:<auto-index-internal>on
+	
+        <format>pdf:<auto-index-internal>on
+        <format>pdf:<xsl:param>boost.url.prefix=http://www.boost.org/doc/libs/release/libs/call_stack/doc/html
+    ;
+
+doxygen autodoc
+    :
+	    [ glob ../../../boost/call_stack/*.hpp ]
+	:
+            <doxygen:param>PROJECT_NAME=Boost.Call_stack
+	    <doxygen:param>EXTRACT_ALL=YES
+            <doxygen:param>GENERATE_HTML=YES
+	;

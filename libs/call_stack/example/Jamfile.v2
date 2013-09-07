@@ -1,0 +1,41 @@
+#~ Copyright 2013 Aurelian Melinte
+#~ Distributed under the Boost Software License, Version 1.0.
+#~ (See http://www.boost.org/LICENSE_1_0.txt)
+
+
+project
+    : requirements
+        <include>../../../..
+        <library>/boost/thread//boost_thread
+        <define>BOOST_ALL_NO_LIB=1
+        <threading>multi
+        <link>static
+
+        <warnings>all
+        <toolset>msvc:<cxxflags>/we4288
+        <toolset>msvc:<cxxflags>/we4238
+        <toolset>msvc:<cxxflags>/we4239
+        <toolset>msvc:<cxxflags>/we4346
+        <toolset>msvc:<cxxflags>/Zc:forScope
+        <toolset>msvc:<cxxflags>/DNOMINMAX
+
+        <toolset>gcc:<cxxflags>-Wextra
+        <toolset>gcc:<cxxflags>-pedantic
+        <toolset>gcc:<cxxflags>-Wno-long-long
+        <toolset>gcc:<cxxflags>-Wsign-compare
+        <toolset>gcc:<cxxflags>-Wmissing-braces
+        #<toolset>gcc:<cxxflags>-std=c++0x
+        #<toolset>gcc:<cxxflags>-ansi
+        #<toolset>gcc:<cxxflags>-fpermissive
+        <toolset>gcc:<linkflags>-rdynamic
+        <toolset>gcc:<linkflags>-lbfd
+        <toolset>gcc:<linkflags>-liberty
+        <toolset>gcc:<linkflags>-lpthread
+        <toolset>gcc:<linkflags>-ldl
+    ;
+
+exe deflt       : default.cpp ;
+exe quick       : quick.cpp ;
+exe null_terse  : null_terse.cpp ;
+exe frame       : frame.cpp ;
+exe exception   : exception.cpp ;
