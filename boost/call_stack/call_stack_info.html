@@ -1,0 +1,129 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<title>Class template call_stack_info</title>
+<link rel="stylesheet" href="../../boostbook.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+<link rel="home" href="../../index.html" title="Chapter&#160;1.&#160;Boost.Call_stack">
+<link rel="up" href="../../header/boost/call_stack/stack_hpp.html" title="Header &lt;boost/call_stack/stack.hpp&gt;">
+<link rel="prev" href="call_stack.html" title="Class template call_stack">
+<link rel="next" href="call_stack_info/const_iterator.html" title="Class const_iterator">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="spirit-nav">
+<a accesskey="p" href="call_stack.html"><img src="../../images/prev.png" alt="Prev"></a><a accesskey="u" href="../../header/boost/call_stack/stack_hpp.html"><img src="../../images/up.png" alt="Up"></a><a accesskey="h" href="../../index.html"><img src="../../images/home.png" alt="Home"></a><a accesskey="n" href="call_stack_info/const_iterator.html"><img src="../../images/next.png" alt="Next"></a>
+</div>
+<div class="refentry">
+<a name="boost.call_stack.call_stack_info"></a><div class="titlepage"></div>
+<div class="refnamediv">
+<h2><span class="refentrytitle">Class template call_stack_info</span></h2>
+<p>boost::call_stack::call_stack_info</p>
+</div>
+<h2 xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="refsynopsisdiv-title">Synopsis</h2>
+<div xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="refsynopsisdiv"><pre class="synopsis"><span class="comment">// In header: &lt;<a class="link" href="../../header/boost/call_stack/stack_hpp.html" title="Header &lt;boost/call_stack/stack.hpp&gt;">boost/call_stack/stack.hpp</a>&gt;
+
+</span><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> CallStack<span class="special">,</span> <span class="keyword">typename</span> AddrResolver<span class="special">,</span> <span class="keyword">typename</span> OutputFormatter<span class="special">&gt;</span> 
+<span class="keyword">class</span> <a class="link" href="call_stack_info.html" title="Class template call_stack_info">call_stack_info</a> <span class="special">{</span>
+<span class="keyword">public</span><span class="special">:</span>
+  <span class="comment">// types</span>
+  <span class="keyword">typedef</span> <span class="identifier">CallStack</span>                                                          <a name="boost.call_stack.call_stack_info.stack_type"></a><span class="identifier">stack_type</span><span class="special">;</span>               
+  <span class="keyword">typedef</span> <span class="identifier">AddrResolver</span>                                                       <a name="boost.call_stack.call_stack_info.symbol_resolver_type"></a><span class="identifier">symbol_resolver_type</span><span class="special">;</span>     
+  <span class="keyword">typedef</span> <span class="identifier">OutputFormatter</span>                                                    <a name="boost.call_stack.call_stack_info.call_frame_formatter_type"></a><span class="identifier">call_frame_formatter_type</span><span class="special">;</span>
+  <span class="keyword">typedef</span> <a class="link" href="call_frame_info.html" title="Class template call_frame_info">call_frame_info</a><span class="special">&lt;</span> <span class="identifier">symbol_resolver_type</span><span class="special">,</span> <span class="identifier">call_frame_formatter_type</span> <span class="special">&gt;</span> <a name="boost.call_stack.call_stack_info.call_frame_info_type"></a><span class="identifier">call_frame_info_type</span><span class="special">;</span>     
+
+  <span class="comment">// member classes/structs/unions</span>
+
+  <span class="keyword">class</span> <a class="link" href="call_stack_info/const_iterator.html" title="Class const_iterator">const_iterator</a> <span class="special">:</span>
+    <span class="keyword">public</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">iterator</span><span class="special">&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">bidirectional_iterator_tag</span><span class="special">,</span> <span class="identifier">ptrdiff_t</span> <span class="special">&gt;</span>
+  <span class="special">{</span>
+  <span class="keyword">public</span><span class="special">:</span>
+    <span class="comment">// <a class="link" href="call_stack_info/const_iterator.html#boost.call_stack.call_stack_info.const_iteratorconstruct-copy-destruct">construct/copy/destruct</a></span>
+    <a class="link" href="call_stack_info/const_iterator.html#id328952-bb"><span class="identifier">const_iterator</span></a><span class="special">(</span><span class="keyword">const</span> <span class="keyword">typename</span> <span class="identifier">stack_type</span><span class="special">::</span><span class="identifier">const_iterator</span> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
+    <a class="link" href="call_stack_info/const_iterator.html#id328960-bb"><span class="identifier">const_iterator</span></a><span class="special">(</span><span class="special">)</span><span class="special">;</span>
+
+    <span class="comment">// <a class="link" href="call_stack_info/const_iterator.html#id328868-bb">public member functions</a></span>
+    <span class="keyword">bool</span> <a class="link" href="call_stack_info/const_iterator.html#id328870-bb"><span class="keyword">operator</span><span class="special">==</span></a><span class="special">(</span><span class="keyword">const</span> <a class="link" href="call_stack_info/const_iterator.html" title="Class const_iterator">const_iterator</a> <span class="special">&amp;</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span>
+    <span class="keyword">bool</span> <a class="link" href="call_stack_info/const_iterator.html#id328885-bb"><span class="keyword">operator</span><span class="special">!=</span></a><span class="special">(</span><span class="keyword">const</span> <a class="link" href="call_stack_info/const_iterator.html" title="Class const_iterator">const_iterator</a> <span class="special">&amp;</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span>
+    <span class="keyword">const</span> <span class="identifier">call_frame_info_type</span> <span class="special">&amp;</span> <a class="link" href="call_stack_info/const_iterator.html#id328899-bb"><span class="keyword">operator</span><span class="special">*</span></a><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span>
+    <span class="keyword">const</span> <span class="identifier">call_frame_info_type</span> <span class="special">*</span> <a class="link" href="call_stack_info/const_iterator.html#id328905-bb"><span class="keyword">operator</span><span class="special">-&gt;</span></a><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span>
+    <a class="link" href="call_stack_info/const_iterator.html" title="Class const_iterator">const_iterator</a> <span class="special">&amp;</span> <a class="link" href="call_stack_info/const_iterator.html#id328911-bb"><span class="keyword">operator</span><span class="special">++</span></a><span class="special">(</span><span class="special">)</span><span class="special">;</span>
+    <a class="link" href="call_stack_info/const_iterator.html" title="Class const_iterator">const_iterator</a> <a class="link" href="call_stack_info/const_iterator.html#id328920-bb"><span class="keyword">operator</span><span class="special">++</span></a><span class="special">(</span><span class="keyword">int</span><span class="special">)</span><span class="special">;</span>
+    <a class="link" href="call_stack_info/const_iterator.html" title="Class const_iterator">const_iterator</a> <span class="special">&amp;</span> <a class="link" href="call_stack_info/const_iterator.html#id328932-bb"><span class="keyword">operator</span><span class="special">--</span></a><span class="special">(</span><span class="special">)</span><span class="special">;</span>
+    <a class="link" href="call_stack_info/const_iterator.html" title="Class const_iterator">const_iterator</a> <a class="link" href="call_stack_info/const_iterator.html#id328940-bb"><span class="keyword">operator</span><span class="special">--</span></a><span class="special">(</span><span class="keyword">int</span><span class="special">)</span><span class="special">;</span>
+  <span class="special">}</span><span class="special">;</span>
+
+  <span class="comment">// <a class="link" href="call_stack_info.html#boost.call_stack.call_stack_infoconstruct-copy-destruct">construct/copy/destruct</a></span>
+  <a class="link" href="call_stack_info.html#id329034-bb"><span class="identifier">call_stack_info</span></a><span class="special">(</span><span class="special">)</span><span class="special">;</span>
+  <a class="link" href="call_stack_info.html#id329035-bb"><span class="identifier">call_stack_info</span></a><span class="special">(</span><span class="keyword">const</span> <span class="identifier">stack_type</span> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
+  <a class="link" href="call_stack_info.html#id329041-bb"><span class="identifier">call_stack_info</span></a><span class="special">(</span><span class="keyword">const</span> <a class="link" href="call_stack_info.html" title="Class template call_stack_info">call_stack_info</a> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
+  call_stack_info&amp; <a class="link" href="call_stack_info.html#id329050-bb"><span class="keyword">operator</span><span class="special">=</span></a><span class="special">(</span><a class="link" href="call_stack_info.html" title="Class template call_stack_info">call_stack_info</a><span class="special">)</span><span class="special">;</span>
+
+  <span class="comment">// <a class="link" href="call_stack_info.html#id328983-bb">public member functions</a></span>
+  <span class="keyword">void</span> <a class="link" href="call_stack_info.html#id328986-bb"><span class="identifier">swap</span></a><span class="special">(</span><a class="link" href="call_stack_info.html" title="Class template call_stack_info">call_stack_info</a> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
+  <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <a class="link" href="call_stack_info.html#id328999-bb"><span class="identifier">as_string</span></a><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span>
+  <a class="link" href="call_stack_info/const_iterator.html" title="Class const_iterator">const_iterator</a> <a class="link" href="call_stack_info.html#id329005-bb"><span class="identifier">begin</span></a><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span>
+  <a class="link" href="call_stack_info/const_iterator.html" title="Class const_iterator">const_iterator</a> <a class="link" href="call_stack_info.html#id329012-bb"><span class="identifier">cbegin</span></a><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span>
+  <a class="link" href="call_stack_info/const_iterator.html" title="Class const_iterator">const_iterator</a> <a class="link" href="call_stack_info.html#id329019-bb"><span class="identifier">end</span></a><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span>
+  <a class="link" href="call_stack_info/const_iterator.html" title="Class const_iterator">const_iterator</a> <a class="link" href="call_stack_info.html#id329026-bb"><span class="identifier">cend</span></a><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span>
+<span class="special">}</span><span class="special">;</span></pre></div>
+<div class="refsect1">
+<a name="id918502"></a><h2>Description</h2>
+<p>Binds together a <a class="link" href="call_stack.html" title="Class template call_stack">call_stack</a>, a <a class="link" href="symbol_resolver.html" title="Class template symbol_resolver">symbol_resolver</a> and a formatter for the call frame information. A collection of <a class="link" href="call_frame_info.html" title="Class template call_frame_info">call_frame_info</a>.</p>
+<p>
+</p>
+<div class="refsect2">
+<a name="id918525"></a><h3>Template Parameters</h3>
+<div class="orderedlist"><ol class="orderedlist" type="1">
+<li class="listitem">
+<pre class="literallayout"><span class="keyword">typename</span> CallStack</pre>
+<p>See <code class="computeroutput"><a class="link" href="call_stack.html" title="Class template call_stack">call_stack</a></code> </p>
+</li>
+<li class="listitem">
+<pre class="literallayout"><span class="keyword">typename</span> AddrResolver</pre>
+<p>See <code class="computeroutput"><a class="link" href="symbol_resolver.html" title="Class template symbol_resolver">symbol_resolver</a></code> </p>
+</li>
+<li class="listitem">
+<pre class="literallayout"><span class="keyword">typename</span> OutputFormatter</pre>
+<p>See <code class="computeroutput"><a class="link" href="terse_call_frame_formatter.html" title="Struct terse_call_frame_formatter">terse_call_frame_formatter</a></code>, <code class="computeroutput"><a class="link" href="fancy_call_frame_formatter.html" title="Struct fancy_call_frame_formatter">fancy_call_frame_formatter</a></code> </p>
+</li>
+</ol></div>
+</div>
+<div class="refsect2">
+<a name="id918604"></a><h3>
+<a name="boost.call_stack.call_stack_infoconstruct-copy-destruct"></a><code class="computeroutput">call_stack_info</code> 
+        public
+       construct/copy/destruct</h3>
+<div class="orderedlist"><ol class="orderedlist" type="1">
+<li class="listitem"><pre class="literallayout"><a name="id329034-bb"></a><span class="identifier">call_stack_info</span><span class="special">(</span><span class="special">)</span><span class="special">;</span></pre></li>
+<li class="listitem"><pre class="literallayout"><a name="id329035-bb"></a><span class="identifier">call_stack_info</span><span class="special">(</span><span class="keyword">const</span> <span class="identifier">stack_type</span> <span class="special">&amp;</span> stack<span class="special">)</span><span class="special">;</span></pre></li>
+<li class="listitem"><pre class="literallayout"><a name="id329041-bb"></a><span class="identifier">call_stack_info</span><span class="special">(</span><span class="keyword">const</span> <a class="link" href="call_stack_info.html" title="Class template call_stack_info">call_stack_info</a> <span class="special">&amp;</span> other<span class="special">)</span><span class="special">;</span></pre></li>
+<li class="listitem"><pre class="literallayout">call_stack_info&amp; <a name="id329050-bb"></a><span class="keyword">operator</span><span class="special">=</span><span class="special">(</span><a class="link" href="call_stack_info.html" title="Class template call_stack_info">call_stack_info</a> other<span class="special">)</span><span class="special">;</span></pre></li>
+</ol></div>
+</div>
+<div class="refsect2">
+<a name="id920932"></a><h3>
+<a name="id328983-bb"></a><code class="computeroutput">call_stack_info</code> public member functions</h3>
+<div class="orderedlist"><ol class="orderedlist" type="1">
+<li class="listitem"><pre class="literallayout"><span class="keyword">void</span> <a name="id328986-bb"></a><span class="identifier">swap</span><span class="special">(</span><a class="link" href="call_stack_info.html" title="Class template call_stack_info">call_stack_info</a> <span class="special">&amp;</span> other<span class="special">)</span><span class="special">;</span></pre></li>
+<li class="listitem"><pre class="literallayout"><span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <a name="id328999-bb"></a><span class="identifier">as_string</span><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span></pre></li>
+<li class="listitem"><pre class="literallayout"><a class="link" href="call_stack_info/const_iterator.html" title="Class const_iterator">const_iterator</a> <a name="id329005-bb"></a><span class="identifier">begin</span><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span></pre></li>
+<li class="listitem"><pre class="literallayout"><a class="link" href="call_stack_info/const_iterator.html" title="Class const_iterator">const_iterator</a> <a name="id329012-bb"></a><span class="identifier">cbegin</span><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span></pre></li>
+<li class="listitem"><pre class="literallayout"><a class="link" href="call_stack_info/const_iterator.html" title="Class const_iterator">const_iterator</a> <a name="id329019-bb"></a><span class="identifier">end</span><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span></pre></li>
+<li class="listitem"><pre class="literallayout"><a class="link" href="call_stack_info/const_iterator.html" title="Class const_iterator">const_iterator</a> <a name="id329026-bb"></a><span class="identifier">cend</span><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span></pre></li>
+</ol></div>
+</div>
+</div>
+</div>
+<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
+<td align="left"></td>
+<td align="right"><div class="copyright-footer">Copyright &#169; 2013 Aurelian Melinte<p>
+        Distributed under the Boost Software License, Version 1.0 See the <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">license</a> and the <a href="http://www.boost.org/users/license.html" target="_top">license FAQ</a>.
+      </p>
+</div></td>
+</tr></table>
+<hr>
+<div class="spirit-nav">
+<a accesskey="p" href="call_stack.html"><img src="../../images/prev.png" alt="Prev"></a><a accesskey="u" href="../../header/boost/call_stack/stack_hpp.html"><img src="../../images/up.png" alt="Up"></a><a accesskey="h" href="../../index.html"><img src="../../images/home.png" alt="Home"></a><a accesskey="n" href="call_stack_info/const_iterator.html"><img src="../../images/next.png" alt="Next"></a>
+</div>
+</body>
+</html>

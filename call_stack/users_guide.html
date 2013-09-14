@@ -1,0 +1,343 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<title>User's Guide</title>
+<link rel="stylesheet" href="../boostbook.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+<link rel="home" href="../index.html" title="Chapter&#160;1.&#160;Boost.Call_stack">
+<link rel="up" href="../index.html" title="Chapter&#160;1.&#160;Boost.Call_stack">
+<link rel="prev" href="examples.html" title="Usage Examples">
+<link rel="next" href="revision_history.html" title="Revision History">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="spirit-nav">
+<a accesskey="p" href="examples.html"><img src="../images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../images/home.png" alt="Home"></a><a accesskey="n" href="revision_history.html"><img src="../images/next.png" alt="Next"></a>
+</div>
+<div class="section">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="call_stack.users_guide"></a><a name="lnk_users_guide"></a><a class="link" href="users_guide.html" title="User's Guide">User's
+    Guide</a>
+</h2></div></div></div>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<li class="listitem">
+          Use a <a class="link" href="users_guide.html#lnk_call_stack">call_stack</a> to capture the information.
+        </li>
+<li class="listitem">
+          Use a <a class="link" href="users_guide.html#lnk_call_stack_info">call_stack_info</a> to output
+          <a class="link" href="users_guide.html#lnk_call_stack">call_stack</a> information.
+        </li>
+<li class="listitem">
+          Use a <a class="link" href="users_guide.html#lnk_call_frame_info">call_frame_info</a> to output
+          <a class="link" href="users_guide.html#lnk_call_frame">call_frame</a> information.
+        </li>
+<li class="listitem">
+          Use a <a class="link" href="users_guide.html#lnk_symbol_info">call_symbol_info</a> to output
+          symbol information given a memory address.
+        </li>
+<li class="listitem">
+          Use <a class="link" href="users_guide.html#lnk_funcs">library functions</a> only if needed
+        </li>
+</ul></div>
+<a name="lnk_call_stack"></a><h5>
+<a name="call_stack.users_guide.h0"></a>
+      <span class="phrase"><a name="call_stack.users_guide.class_call_stack"></a></span><a class="link" href="users_guide.html#call_stack.users_guide.class_call_stack">Class
+      call_stack</a>
+    </h5>
+<p>
+      <code class="computeroutput"><a class="link" href="../boost/call_stack/call_stack.html" title="Class template call_stack">call_stack</a></code> is a
+      platform-agnostic data structure to keep <code class="computeroutput"><a class="link" href="../boost/call_stack/call_frame.html" title="Class call_frame">call_frame</a></code>s
+      information in. Use a <code class="computeroutput"><a class="link" href="../boost/call_stack/call_stack_info.html" title="Class template call_stack_info">boost::call_stack::call_stack_info</a></code>
+      to render it in a human-readable form.
+    </p>
+<p>
+      The template is parameterized by the maximum depth of the stack to be collected.
+    </p>
+<p>
+      One can get the stack either when a <code class="computeroutput"><a class="link" href="../boost/call_stack/call_stack.html" title="Class template call_stack">call_stack</a></code>
+      object is constructed, either later, by calling member <code class="literal">get_stack()</code>.
+    </p>
+<h6>
+<a name="call_stack.users_guide.h1"></a>
+      <span class="phrase"><a name="call_stack.users_guide.example"></a></span><a class="link" href="users_guide.html#call_stack.users_guide.example">Example</a>
+    </h6>
+<p>
+      See <a class="link" href="examples.html#lnk_examples_quick">previous section</a>.
+    </p>
+<a name="lnk_call_frame"></a><h5>
+<a name="call_stack.users_guide.h2"></a>
+      <span class="phrase"><a name="call_stack.users_guide.class_call_frame"></a></span><a class="link" href="users_guide.html#call_stack.users_guide.class_call_frame">Class
+      call_frame</a>
+    </h5>
+<p>
+      <code class="computeroutput"><a class="link" href="../boost/call_stack/call_frame.html" title="Class call_frame">call_frame</a></code> holds
+      the information of a <a href="http://en.wikipedia.org/wiki/Call_stack" target="_top">call
+      stack frame</a>. Use a <code class="computeroutput"><a class="link" href="../boost/call_stack/call_frame_info.html" title="Class template call_frame_info">call_frame_info</a></code>
+      to print it.
+    </p>
+<h6>
+<a name="call_stack.users_guide.h3"></a>
+      <span class="phrase"><a name="call_stack.users_guide.example0"></a></span><a class="link" href="users_guide.html#call_stack.users_guide.example0">Example</a>
+    </h6>
+<p>
+</p>
+<pre class="programlisting"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">call_stack</span><span class="special">::</span><span class="identifier">call_stack</span><span class="special">&lt;</span><span class="number">40</span><span class="special">&gt;</span> <span class="identifier">astack</span><span class="special">;</span> <span class="comment">//</span>
+<span class="identifier">astack</span><span class="special">.</span><span class="identifier">get_stack</span><span class="special">();</span> <span class="comment">// Where am I now?</span>
+<span class="keyword">for</span> <span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">i</span> <span class="special">=</span> <span class="number">0</span><span class="special">;</span> <span class="identifier">i</span> <span class="special">&lt;</span> <span class="identifier">astack</span><span class="special">.</span><span class="identifier">size</span><span class="special">();</span> <span class="special">++</span><span class="identifier">i</span><span class="special">)</span>
+<span class="special">{</span>
+    <span class="identifier">boost</span><span class="special">::</span><span class="identifier">call_stack</span><span class="special">::</span><span class="identifier">call_frame</span> <span class="identifier">aframe</span><span class="special">(</span> <span class="identifier">astack</span><span class="special">[</span><span class="identifier">i</span><span class="special">]</span> <span class="special">);</span>
+    <span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">call_stack</span><span class="special">::</span><span class="identifier">call_frame_info</span><span class="special">&lt;</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">call_stack</span><span class="special">::</span><span class="identifier">extended_symbol_resolver</span>    <span class="comment">// extended_symbol_resolver, basic_symbol_resolver or null_symbol_resolver</span>
+                                                   <span class="special">,</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">call_stack</span><span class="special">::</span><span class="identifier">fancy_call_frame_formatter</span>  <span class="comment">// fancy_call_frame_formatter or terse_call_frame_formatter</span>
+                                                   <span class="special">&gt;</span> <span class="special">(</span><span class="identifier">aframe</span><span class="special">)</span>
+              <span class="special">&lt;&lt;</span> <span class="string">"\n"</span>
+              <span class="special">;</span>
+<span class="special">}</span>
+</pre>
+<p>
+    </p>
+<a name="lnk_frame_formatters"></a><h5>
+<a name="call_stack.users_guide.h4"></a>
+      <span class="phrase"><a name="call_stack.users_guide.call_frame_formatters"></a></span><a class="link" href="users_guide.html#call_stack.users_guide.call_frame_formatters">Call
+      Frame Formatters</a>
+    </h5>
+<p>
+      A <code class="computeroutput"><a class="link" href="../boost/call_stack/call_frame.html" title="Class call_frame">call_frame</a></code> formatter
+      dictates how the symbol information is to be printed to an output stream. The
+      library supplies two symbol formatters:
+    </p>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<li class="listitem">
+          <code class="computeroutput"><a class="link" href="../boost/call_stack/terse_symbol_formatter.html" title="Struct terse_symbol_formatter">terse_symbol_formatter</a></code>
+        </li>
+<li class="listitem">
+          <code class="computeroutput"><a class="link" href="../boost/call_stack/fancy_symbol_formatter.html" title="Struct fancy_symbol_formatter">fancy_symbol_formatter</a></code>
+        </li>
+</ul></div>
+<h6>
+<a name="call_stack.users_guide.h5"></a>
+      <span class="phrase"><a name="call_stack.users_guide.example1"></a></span><a class="link" href="users_guide.html#call_stack.users_guide.example1">Example</a>
+    </h6>
+<p>
+</p>
+<pre class="programlisting"><span class="keyword">typedef</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">call_stack</span><span class="special">::</span><span class="identifier">call_stack</span><span class="special">&lt;</span><span class="number">39</span><span class="special">&gt;</span> <span class="identifier">stack_type</span><span class="special">;</span>
+<span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="string">"I am here: \n"</span>
+          <span class="special">&lt;&lt;</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">call_stack</span><span class="special">::</span><span class="identifier">call_stack_info</span><span class="special">&lt;</span> <span class="identifier">stack_type</span>
+                                               <span class="special">,</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">call_stack</span><span class="special">::</span><span class="identifier">null_symbol_resolver</span>
+                                               <span class="special">,</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">call_stack</span><span class="special">::</span><span class="identifier">terse_call_frame_formatter</span>
+                                               <span class="special">&gt;(</span><span class="identifier">stack_type</span><span class="special">(</span><span class="keyword">true</span><span class="special">))</span>
+          <span class="special">&lt;&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">endl</span><span class="special">;</span>
+</pre>
+<p>
+    </p>
+<p>
+      Output:
+    </p>
+<p>
+</p>
+<pre class="programlisting"><span class="identifier">I</span> <span class="identifier">am</span> <span class="identifier">here</span><span class="special">:</span>
+<span class="special">[</span><span class="identifier">eb1eea</span><span class="special">]</span> <span class="special">??+</span><span class="number">0x0</span> <span class="special">(??)</span> <span class="identifier">in</span> <span class="special">??:</span><span class="number">0</span>
+<span class="special">[</span><span class="identifier">eb6f30</span><span class="special">]</span> <span class="special">??+</span><span class="number">0x0</span> <span class="special">(??)</span> <span class="identifier">in</span> <span class="special">??:</span><span class="number">0</span>
+<span class="special">[</span><span class="identifier">eb2b1c</span><span class="special">]</span> <span class="special">??+</span><span class="number">0x0</span> <span class="special">(??)</span> <span class="identifier">in</span> <span class="special">??:</span><span class="number">0</span>
+<span class="special">[</span><span class="identifier">eb2ab4</span><span class="special">]</span> <span class="special">??+</span><span class="number">0x0</span> <span class="special">(??)</span> <span class="identifier">in</span> <span class="special">??:</span><span class="number">0</span>
+<span class="special">[</span><span class="identifier">eb1086</span><span class="special">]</span> <span class="special">??+</span><span class="number">0x0</span> <span class="special">(??)</span> <span class="identifier">in</span> <span class="special">??:</span><span class="number">0</span>
+<span class="special">[</span><span class="identifier">eb9689</span><span class="special">]</span> <span class="special">??+</span><span class="number">0x0</span> <span class="special">(??)</span> <span class="identifier">in</span> <span class="special">??:</span><span class="number">0</span>
+<span class="special">[</span><span class="identifier">eb97cd</span><span class="special">]</span> <span class="special">??+</span><span class="number">0x0</span> <span class="special">(??)</span> <span class="identifier">in</span> <span class="special">??:</span><span class="number">0</span>
+<span class="special">[</span><span class="number">765433</span><span class="identifier">aa</span><span class="special">]</span> <span class="special">??+</span><span class="number">0x0</span> <span class="special">(??)</span> <span class="identifier">in</span> <span class="special">??:</span><span class="number">0</span>
+<span class="special">[</span><span class="number">779d</span><span class="error">9</span><span class="identifier">ef2</span><span class="special">]</span> <span class="special">??+</span><span class="number">0x0</span> <span class="special">(??)</span> <span class="identifier">in</span> <span class="special">??:</span><span class="number">0</span>
+<span class="special">[</span><span class="number">779d</span><span class="error">9</span><span class="identifier">ec5</span><span class="special">]</span> <span class="special">??+</span><span class="number">0x0</span> <span class="special">(??)</span> <span class="identifier">in</span> <span class="special">??:</span><span class="number">0</span>
+</pre>
+<p>
+    </p>
+<a name="lnk_call_frame_info"></a><h5>
+<a name="call_stack.users_guide.h6"></a>
+      <span class="phrase"><a name="call_stack.users_guide.class_call_frame_info"></a></span><a class="link" href="users_guide.html#call_stack.users_guide.class_call_frame_info">Class
+      call_frame_info</a>
+    </h5>
+<p>
+      <code class="computeroutput"><a class="link" href="../boost/call_stack/call_frame_info.html" title="Class template call_frame_info">call_frame_info</a></code>
+      binds together:
+    </p>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<li class="listitem">
+          <a class="link" href="users_guide.html#lnk_symbol_resolvers">a symbol resolver</a>.
+        </li>
+<li class="listitem">
+          <a class="link" href="users_guide.html#lnk_frame_formatters">a frame formatter</a>.
+        </li>
+</ul></div>
+<p>
+      Used to output <a class="link" href="users_guide.html#lnk_call_frame">call_frame</a> information.
+    </p>
+<h6>
+<a name="call_stack.users_guide.h7"></a>
+      <span class="phrase"><a name="call_stack.users_guide.example2"></a></span><a class="link" href="users_guide.html#call_stack.users_guide.example2">Example</a>
+    </h6>
+<p>
+</p>
+<pre class="programlisting"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">call_stack</span><span class="special">::</span><span class="identifier">call_stack</span><span class="special">&lt;</span><span class="number">40</span><span class="special">&gt;</span> <span class="identifier">astack</span><span class="special">;</span> <span class="comment">//</span>
+<span class="identifier">astack</span><span class="special">.</span><span class="identifier">get_stack</span><span class="special">();</span> <span class="comment">// Where am I now?</span>
+<span class="keyword">for</span> <span class="special">(</span><span class="identifier">std</span><span class="special">::</span><span class="identifier">size_t</span> <span class="identifier">i</span> <span class="special">=</span> <span class="number">0</span><span class="special">;</span> <span class="identifier">i</span> <span class="special">&lt;</span> <span class="identifier">astack</span><span class="special">.</span><span class="identifier">size</span><span class="special">();</span> <span class="special">++</span><span class="identifier">i</span><span class="special">)</span>
+<span class="special">{</span>
+    <span class="identifier">boost</span><span class="special">::</span><span class="identifier">call_stack</span><span class="special">::</span><span class="identifier">call_frame</span> <span class="identifier">aframe</span><span class="special">(</span> <span class="identifier">astack</span><span class="special">[</span><span class="identifier">i</span><span class="special">]</span> <span class="special">);</span>
+    <span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">call_stack</span><span class="special">::</span><span class="identifier">call_frame_info</span><span class="special">&lt;</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">call_stack</span><span class="special">::</span><span class="identifier">extended_symbol_resolver</span>    <span class="comment">// extended_symbol_resolver, basic_symbol_resolver or null_symbol_resolver</span>
+                                                   <span class="special">,</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">call_stack</span><span class="special">::</span><span class="identifier">fancy_call_frame_formatter</span>  <span class="comment">// fancy_call_frame_formatter or terse_call_frame_formatter</span>
+                                                   <span class="special">&gt;</span> <span class="special">(</span><span class="identifier">aframe</span><span class="special">)</span>
+              <span class="special">&lt;&lt;</span> <span class="string">"\n"</span>
+              <span class="special">;</span>
+<span class="special">}</span>
+</pre>
+<p>
+    </p>
+<a name="lnk_symbol_info"></a><h5>
+<a name="call_stack.users_guide.h8"></a>
+      <span class="phrase"><a name="call_stack.users_guide.class_symbol_info"></a></span><a class="link" href="users_guide.html#call_stack.users_guide.class_symbol_info">Class
+      symbol_info</a>
+    </h5>
+<p>
+      <code class="computeroutput"><a class="link" href="../boost/call_stack/symbol_info.html" title="Class template symbol_info">symbol_info</a></code> binds
+      together:
+    </p>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<li class="listitem">
+          <a class="link" href="users_guide.html#lnk_symbol_resolvers">a symbol resolver</a>.
+        </li>
+<li class="listitem">
+          <a class="link" href="users_guide.html#lnk_symbol_formatters">a symbol formatter</a>.
+        </li>
+</ul></div>
+<p>
+      You can pass in to the constructor an arbitrary memory address. Do so at your
+      own risk: proper resolution is platform-dependent and sometimes unreliable.
+    </p>
+<a name="lnk_symbol_info_example"></a><h6>
+<a name="call_stack.users_guide.h9"></a>
+      <span class="phrase"><a name="call_stack.users_guide.example3"></a></span><a class="link" href="users_guide.html#call_stack.users_guide.example3">Example</a>
+    </h6>
+<p>
+</p>
+<pre class="programlisting"><span class="comment">// Construction from some address (of a function). Notes: MSVC 7.1 fails to resolve it.</span>
+<span class="identifier">boost</span><span class="special">::</span><span class="identifier">call_stack</span><span class="special">::</span><span class="identifier">symbol_info</span><span class="special">&lt;</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">call_stack</span><span class="special">::</span><span class="identifier">extended_symbol_resolver</span><span class="special">,</span>
+                                <span class="identifier">boost</span><span class="special">::</span><span class="identifier">call_stack</span><span class="special">::</span><span class="identifier">fancy_symbol_formatter</span> <span class="special">&gt;</span> <span class="identifier">sym1</span><span class="special">(</span> <span class="identifier">func1</span> <span class="special">);</span>
+<span class="identifier">std</span><span class="special">::</span><span class="identifier">cout</span> <span class="special">&lt;&lt;</span> <span class="string">"\nfunc1 symbol info:\n"</span> <span class="special">&lt;&lt;</span> <span class="identifier">sym1</span> <span class="special">&lt;&lt;</span> <span class="identifier">std</span><span class="special">::</span><span class="identifier">endl</span><span class="special">;</span>
+</pre>
+<p>
+    </p>
+<a name="lnk_symbol_formatters"></a><h5>
+<a name="call_stack.users_guide.h10"></a>
+      <span class="phrase"><a name="call_stack.users_guide.symbol_formatters"></a></span><a class="link" href="users_guide.html#call_stack.users_guide.symbol_formatters">Symbol
+      Formatters</a>
+    </h5>
+<p>
+      A symbol formatter dictates how the symbol information is to be printed to
+      an output stream. The library supplies two symbol formatters:
+    </p>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<li class="listitem">
+          <code class="computeroutput"><a class="link" href="../boost/call_stack/terse_symbol_formatter.html" title="Struct terse_symbol_formatter">terse_symbol_formatter</a></code>
+        </li>
+<li class="listitem">
+          <code class="computeroutput"><a class="link" href="../boost/call_stack/fancy_symbol_formatter.html" title="Struct fancy_symbol_formatter">fancy_symbol_formatter</a></code>
+        </li>
+</ul></div>
+<h6>
+<a name="call_stack.users_guide.h11"></a>
+      <span class="phrase"><a name="call_stack.users_guide.example4"></a></span><a class="link" href="users_guide.html#call_stack.users_guide.example4">Example</a>
+    </h6>
+<p>
+      See <a class="link" href="users_guide.html#lnk_symbol_info_example">above</a>.
+    </p>
+<a name="lnk_symbol_resolvers"></a><h5>
+<a name="call_stack.users_guide.h12"></a>
+      <span class="phrase"><a name="call_stack.users_guide.class_symbol_resolver"></a></span><a class="link" href="users_guide.html#call_stack.users_guide.class_symbol_resolver">Class
+      symbol_resolver</a>
+    </h5>
+<p>
+      There are three symbol resolvers in the library:
+    </p>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<li class="listitem">
+          <code class="computeroutput"><a class="link" href="../boost/call_stack/null_symbol_resolver.html" title="Type definition null_symbol_resolver">null_symbol_resolver</a></code>:
+          Does nothing. This could be useful when tracing call stacks in difficult
+          situations, such as low memory conditions. Typically, resolving symols
+          implies memory allocations by the platform API used to resolve symbols.
+        </li>
+<li class="listitem">
+          <code class="computeroutput"><a class="link" href="../boost/call_stack/basic_symbol_resolver.html" title="Type definition basic_symbol_resolver">basic_symbol_resolver</a></code>:
+          Resolve symbols to the extent that the API used is installed by default
+          on the platform. For instance, for GCC that would bean API restricted to
+          libc.lib.
+        </li>
+<li class="listitem">
+          <code class="computeroutput"><a class="link" href="../header/boost/call_stack/symbol_hpp.html#boost.call_stack.extended_symbol_resolver">extended_symbol_resolver</a></code>:
+          Resolve symbols with the help of extra libraries. This could add link dependencies
+          to libraries that are not installed. For instance, for GCC, libbfd is used
+          to resolve file names and line numbers. Define <code class="literal">BOOST_CALL_STACK_NO_OPTIONAL_LIBS</code>
+          to cut these dependencies off.
+        </li>
+</ul></div>
+<h6>
+<a name="call_stack.users_guide.h13"></a>
+      <span class="phrase"><a name="call_stack.users_guide.example5"></a></span><a class="link" href="users_guide.html#call_stack.users_guide.example5">Example</a>
+    </h6>
+<p>
+      See above.
+    </p>
+<a name="lnk_call_stack_info"></a><h5>
+<a name="call_stack.users_guide.h14"></a>
+      <span class="phrase"><a name="call_stack.users_guide.class_call_stack_info"></a></span><a class="link" href="users_guide.html#call_stack.users_guide.class_call_stack_info">Class
+      call_stack_info</a>
+    </h5>
+<p>
+      <code class="computeroutput"><a class="link" href="../boost/call_stack/call_stack_info.html" title="Class template call_stack_info">call_stack_info</a></code>
+      is used to render to render <code class="computeroutput"><a class="link" href="../boost/call_stack/call_stack.html" title="Class template call_stack">call_stack</a></code>
+      in a human-readable form.
+    </p>
+<p>
+      It binds together:
+    </p>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<li class="listitem">
+          A <a class="link" href="users_guide.html#lnk_call_stack">call_stack</a>.
+        </li>
+<li class="listitem">
+          A <a class="link" href="users_guide.html#lnk_symbol_resolvers">symbol resolver</a>.
+        </li>
+<li class="listitem">
+          A <a class="link" href="users_guide.html#lnk_frame_formatters">call frame formatter</a>.
+        </li>
+</ul></div>
+<h6>
+<a name="call_stack.users_guide.h15"></a>
+      <span class="phrase"><a name="call_stack.users_guide.example6"></a></span><a class="link" href="users_guide.html#call_stack.users_guide.example6">Example</a>
+    </h6>
+<p>
+      See <a class="link" href="examples.html#lnk_examples_quick">previous section</a>.
+    </p>
+<a name="lnk_funcs"></a><h5>
+<a name="call_stack.users_guide.h16"></a>
+      <span class="phrase"><a name="call_stack.users_guide.boost__call_stack__init_and_boost__call_stack__shutdown"></a></span><a class="link" href="users_guide.html#call_stack.users_guide.boost__call_stack__init_and_boost__call_stack__shutdown">boost::call_stack::init
+      and boost::call_stack::shutdown</a>
+    </h5>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<li class="listitem">
+          <code class="computeroutput"><a class="link" href="../boost/call_stack/init.html" title="Function init">boost::call_stack::init</a></code>.
+          Library initialization. Called implicitly at first usage of a symbol resolver.
+        </li>
+<li class="listitem">
+          <code class="computeroutput"><a class="link" href="../boost/call_stack/shutdown.html" title="Function shutdown">boost::call_stack::shutdown</a></code>.
+          Library de-initilization. Call it explicitly if the platform requires.
+        </li>
+</ul></div>
+</div>
+<table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
+<td align="left"></td>
+<td align="right"><div class="copyright-footer">Copyright &#169; 2013 Aurelian Melinte<p>
+        Distributed under the Boost Software License, Version 1.0 See the <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">license</a> and the <a href="http://www.boost.org/users/license.html" target="_top">license FAQ</a>.
+      </p>
+</div></td>
+</tr></table>
+<hr>
+<div class="spirit-nav">
+<a accesskey="p" href="examples.html"><img src="../images/prev.png" alt="Prev"></a><a accesskey="u" href="../index.html"><img src="../images/up.png" alt="Up"></a><a accesskey="h" href="../index.html"><img src="../images/home.png" alt="Home"></a><a accesskey="n" href="revision_history.html"><img src="../images/next.png" alt="Next"></a>
+</div>
+</body>
+</html>
