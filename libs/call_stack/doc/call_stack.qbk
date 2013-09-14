@@ -11,9 +11,9 @@
     [license
         Distributed under the Boost Software License, Version 1.0
         See the [@http://www.boost.org/LICENSE_1_0.txt license] and 
-		the [@http://www.boost.org/users/license.html license FAQ]. 
+        the [@http://www.boost.org/users/license.html license FAQ]. 
     ]
-	[source-mode c++]
+    [source-mode c++]
 ]
 
 [template super[x]'''<superscript>'''[x]'''</superscript>''']
@@ -49,104 +49,117 @@ Broadly, the library contains:
 * Tools for symbol resolution with various degrees of detail.
 * Formatters to display above information in a human-readable form.
 
-[#lnk_introduction_building]
-[section:introduction_building Building Boost.Call_stack]
+[h4 Links and downloads]
+
+* [@http://melintea.github.io/Boost-Call_stack/index.html Online documentation.]
+* [@https://github.com/melintea/Boost-Call_stack Code repository.]
+
+[h4 Building Boost.Call_stack]
 
 [*Boost.Call_stack] is a header only library. Include your Boost header directory in your
 compiler include path, as well as the path to the [*Boost.Call_stack] headers.
 
-[endsect]
-
-[#lnk_tested_compilers]
-[section:tested_compilers Compilers and platforms]
+[h4 Compilers and platforms]
 
 [*Boost.Call_stack] is C++98 code. It is known to work with:
 
-*  Visual C++ 7.1 (2003) and later.
-*  GCC 4.7 and later.
+* Visual C++ 7.1 (2003) and later (verified on Windows 7 64 bits Intel).
+    * I386
+    * AMD64
+    * IA64
+* GCC 4.7 and later (verified on Debian 32 and 64 bits Intel).
+    * x86
+    * x86_64
 
-[endsect]
+[h4 Dependencies]
 
-[#lnk_dependencies]
-[section:dependencies Dependencies]
-
-[h4 All Platforms]
+[h5 All Platforms]
 * Boost (verified with version 1.51): 
-	* Boost.Array
+    * Boost.Array
     * Boost.Config
-	* Boost.Date_Time
-	* Boost.Move
-	* Boost.Smart_ptr
-	* Boost.StaticAssert
-	* Boost.Test 
+    * Boost.Date_Time
+    * Boost.Move
+    * Boost.Smart_ptr
+    * Boost.StaticAssert
+    * Boost.Test 
     * [@http://www.boost.org/libs/thread/index.html Boost.Thread]
-	* Boost.TypeTraits
-	* Boost.Utility
+    * Boost.TypeTraits
+    * Boost.Utility
 
-[h4 Platform specific]
+[h5 Platform specific]
 * Windows
-    * Links with [^DbgHelp.dll].
+    * Links with [^DbgHelp.dll]. Version 5.1 or later required, YMMV depending on the library version.
 * GCC
     * Links with [^libbfd] by default. Optional.
+    * Links with [^libdl].
 
 Define [^BOOST_CALL_STACK_NO_OPTIONAL_LIBS] to cut dependencies on libraries that 
-are not installed by default on the platform (optional libraries).  This could 
+are not installed by default on the platform (the optional libraries).  This could 
 affect the level of detail of the functionality of this library.  By default,
 optional libraries are used and linked with. 
 
-For instance, this will cut the dependency on [^libbfd] on GCC platforms and 
-some symbols will not resolve properly, nor would line numbers be available.  
-
-[endsect]
-
-[#lnk_download]
-[section:download Download]
-
-* Online documentation: http://melintea.github.io/Boost-Call_stack/index.html
-* Code repository: https://github.com/melintea/Boost-Call_stack
-
-[endsect]
-
-[#lnk_quick_guide]
-[section:quick_guide The Quick Guide]
-
-[default]
-
-[quick]
-
-[exception]
-
-[endsect]
+For instance, this will cut the dependency on [^libbfd] on GCC platforms - as a
+consequence some symbols will not resolve properly, nor would line numbers be
+available.
 
 [endsect] [/ intro]
 [/ -------------------------------------------------------------------------- ]
 
+[#lnk_examples]
+[section:examples Usage Examples]
 
+[#lnk_examples_default]
+[default]
+
+[#lnk_examples_quick]
+[quick]
+
+[#lnk_examples_exception]
+[exception]
+
+[endsect] [/ examples]
+[/ -------------------------------------------------------------------------- ]
+
+[#lnk_users_guide]
+[section:users_guide User's Guide]
+
+* Use a [link lnk_call_stack call_stack] to capture the information.
+* Use a [link lnk_call_stack_info call_stack_info] to output [link lnk_call_stack call_stack] information.
+* Use a [link lnk_call_frame_info call_frame_info] to output [link lnk_call_frame call_frame] information.
+* Use a [link lnk_symbol_info call_symbol_info] to output symbol information given a memory address.
+* Use [link lnk_funcs library functions] only if needed
+
+[/ ----- ]
 [#lnk_call_stack]
-[section:class_call_stack Class call_stack]
-[h4 Description]
+[h4 Class call_stack]
 
-[classref boost::call_stack::call_stack call_stack] is a collection of 
-[classref boost::call_stack::call_frame call_frame]s. 
+[classref boost::call_stack::call_stack call_stack] is a platform-agnostic data
+structure to keep [classref boost::call_stack::call_frame call_frame]s
+information in.  Use a [classref boost::call_stack::call_stack_info] to render
+it in a human-readable form.
 
-[h4 Synopsis]
-[h4 Example]
+The template is parameterized by the maximum depth of the stack to be collected.
 
-[endsect]
+One can get the stack either when a [classref boost::call_stack::call_stack call_stack]
+object is constructed, either later, by calling member [^get_stack()].
 
+[h5 Example]
+See [link lnk_examples_quick previous section].
+
+[/ ----- ]
 [#lnk_call_frame]
-[section:call_frame Class call_frame]
+[h4 Class call_frame]
 
 [classref boost::call_stack::call_frame call_frame] holds the information of a 
 [@http://en.wikipedia.org/wiki/Call_stack call stack frame]. 
-Use a [link lnk_frame_info call_frame_info] to print it.
+Use a [classref boost::call_stack::call_frame_info call_frame_info] to print it.
 
+[h5 Example]
 [frame]
 
-[endsect]
-
+[/ ----- ]
 [#lnk_frame_formatters]
-[section:frame_formatters Call Frame Formatters]
+[h4 Call Frame Formatters]
 
 A [classref boost::call_stack::call_frame call_frame] formatter dictates how the 
 symbol information is to be printed to an output stream. The library supplies 
@@ -155,37 +168,48 @@ two symbol formatters:
 * [classref boost::call_stack::terse_symbol_formatter terse_symbol_formatter]
 * [classref boost::call_stack::fancy_symbol_formatter fancy_symbol_formatter]
 
+[h5 Example]
 [null_terse]
 [null_terse_doc]
 
-[endsect]
-
-[#lnk_frame_info]
-[section:frame_info Class call_frame_info]
+[/ ----- ]
+[#lnk_call_frame_info]
+[h4 Class call_frame_info]
 
 [classref boost::call_stack::call_frame_info call_frame_info] binds together:
 
 * [link lnk_symbol_resolvers a symbol resolver].
 * [link lnk_frame_formatters a frame formatter].
 
+Used to output [link lnk_call_frame call_frame] information.
+
+[h5 Example]
 [frame]
 
-[endsect]
-
-
+[/ ----- ]
 [#lnk_symbol_info]
-[section:symbol_info Class symbol_info]
+[h4 Class symbol_info]
 
 [classref boost::call_stack::symbol_info symbol_info] binds together:
 
 * [link lnk_symbol_resolvers a symbol resolver].
 * [link lnk_symbol_formatters a symbol formatter].
 
-[endsect]
+You can pass in to the constructor an arbitrary memory address. Do so at your
+own risk: proper resolution is platform-dependent and sometimes unreliable.
 
+[#lnk_symbol_info_example]
+[h5 Example]
+``
+// Construction from some address (of a function). Notes: MSVC 7.1 fails to resolve it.
+boost::call_stack::symbol_info< boost::call_stack::extended_symbol_resolver,
+                                boost::call_stack::fancy_symbol_formatter > sym1( func1 );
+std::cout << "\nfunc1 symbol info:\n" << sym1 << std::endl;
+``
 
+[/ ----- ]
 [#lnk_symbol_formatters]
-[section:symbol_formatters Symbol Formatters]
+[h4 Symbol Formatters]
 
 A symbol formatter dictates how the symbol information is to be printed to an
 output stream. The library supplies two symbol formatters:
@@ -193,11 +217,12 @@ output stream. The library supplies two symbol formatters:
 * [classref boost::call_stack::terse_symbol_formatter terse_symbol_formatter]
 * [classref boost::call_stack::fancy_symbol_formatter fancy_symbol_formatter]
 
-[endsect]
+[h5 Example]
+See [link lnk_symbol_info_example above].
 
-
+[/ ----- ]
 [#lnk_symbol_resolvers]
-[section:symbol_resolvers Class symbol_resolver]
+[h4 Class symbol_resolver]
 
 There are three symbol resolvers in the library:
 
@@ -218,24 +243,41 @@ There are three symbol resolvers in the library:
   Define [^BOOST_CALL_STACK_NO_OPTIONAL_LIBS] to cut these dependencies
   off.
 
-[endsect]
+[h5 Example]
+See above.
 
-
+[/ ----- ]
 [#lnk_call_stack_info]
-[section:call_stack_info Class call_stack_info]
-[endsect]
+[h4 Class call_stack_info]
 
-[#lnk_call_stack_init]
-[section:call_stack_init boost::call_stack::init and boost::call_stack::shutdown]
-[endsect]
+[classref boost::call_stack::call_stack_info call_stack_info] is used to render
+to render [classref boost::call_stack::call_stack call_stack] in a human-readable
+form.
 
+It binds together:
+
+* A [link lnk_call_stack call_stack].
+* A [link lnk_symbol_resolvers symbol resolver].
+* A [link lnk_frame_formatters call frame formatter].
+
+[h5 Example]
+See [link lnk_examples_quick previous section].
+
+[/ ----- ]
+[#lnk_funcs]
+[h4 boost::call_stack::init and boost::call_stack::shutdown]
+
+* [funcref boost::call_stack::init]. Library initialization. Called implicitly
+  at first usage of a symbol resolver.
+* [funcref boost::call_stack::shutdown]. Library de-initilization. Call it
+  explicitly if the platform requires.
+
+[endsect] [/ users_guide]
 [/ -------------------------------------------------------------------------- ]
 
 
 [#lnk_revision_history]
 [section:revision_history Revision History]
-
-Rev hist.
 
 [endsect]
 

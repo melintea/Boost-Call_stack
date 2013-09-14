@@ -9,8 +9,14 @@
 
 //[exception
 /*`
-[h4 A traced exception]
-To trace an exception back to the place in code where it was thrown:
+[h4 A traced exception example]
+To trace an exception back to the place in code where it was thrown, embed a 
+call_stack in the exception.  This might not be feasible nor desireable for 
+all types of exceptions.  
+
+For instance, a symbol resolver will usually allocate heap memory for the 
+symbol information and this might not be a good thing for in a bad_alloc 
+context.  In such difficult situations, the null_resolver might be of help.
 */
 
 #include <iostream>
@@ -30,7 +36,7 @@ public:
 
     traced_exception()
         : std::exception()
-        , _where(true)
+        , _where(true) // Capture stack
     {}
 
     const stack_type& where() const throw()
@@ -76,6 +82,7 @@ int main()
 }
 
 /*`
+Possible output on a Linux platform:
 ``
 Exception: traced_exception
 Stack is 10 frames depth:

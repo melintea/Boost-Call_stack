@@ -8,8 +8,10 @@
 
 //[default
 /*`
-[h4 Simplest usage]
-Getting the call stack and printing it is one line away:
+[h4 One-line usage]
+One can simply use the defaults provided by the library.  In the example below, 
+the two steps (getting the stack and resolving its symbols) are collapsed into 
+one line:
 */
 
 #include <iostream>
@@ -25,7 +27,7 @@ int main()
 
 /*`
 
-And the output could look like:
+On a Windows platform, the output could look like:
 ``
 I am here: 
 [181eea] boost::call_stack::detail::get_stack<boost::call_stack::call_frame,40>+0x4a

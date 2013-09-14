@@ -13,7 +13,8 @@
 int main()
 {
 //[frame
-    boost::call_stack::call_stack<40> astack(true);
+    boost::call_stack::call_stack<40> astack; //
+    astack.get_stack(); // Where am I now?
     for (std::size_t i = 0; i < astack.size(); ++i) 
     {
         boost::call_stack::call_frame aframe( astack[i] );
