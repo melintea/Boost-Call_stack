@@ -23,7 +23,7 @@
 
 #if defined(BOOST_MSVC)
 #  include <boost/call_stack/detail/win/win.hpp>
-#elif defined(BOOST_GCC)
+#elif defined(__GNUG__) || defined(BOOST_GCC)
 #  include <boost/call_stack/detail/gnu/gnu.hpp>
 #else
 #  error "Unsupported platform."

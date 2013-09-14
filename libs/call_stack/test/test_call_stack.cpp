@@ -351,7 +351,7 @@ void test_start()
 # else
     std::cout << "; Release build" << std::endl;
 # endif
-#elif defined(BOOST_GCC)
+#elif defined(__GNUG__) || defined(BOOST_GCC)
     std::cout << "gcc version: " << __GNUC__ << "." << __GNUC_MINOR__ << "." << __GNUC_PATCHLEVEL__ << std::endl;
 #else
 #  error "Unsupported platform"

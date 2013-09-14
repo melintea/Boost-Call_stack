@@ -11,3 +11,6 @@
 *.lai
 *.la
 *.a
+
+# Boost compiled stuff
+bin.v2/
