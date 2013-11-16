@@ -15,7 +15,9 @@ int main()
 
 //[quick
 /*` [h4 Another simple usage] */
-/*` If the defaults offered by the library are not adequate: */
+/*` If the defaults offered by the library are not adequate, choose a symbol
+    resolver, a frame formatter and a stack depth to create the appropriate
+    [classref boost::call_stack::call_stack_info]: */
 
     // Maximum depth of the stack to collect.
     static const std::size_t max_stack_size = 20;  

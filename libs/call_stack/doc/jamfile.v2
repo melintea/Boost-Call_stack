@@ -49,7 +49,7 @@ doxygen autodoc
     :
 	    [ glob ../../../boost/call_stack/*.hpp ]
 	:
-            <doxygen:param>PROJECT_NAME=Boost.Call_stack
+        <doxygen:param>PROJECT_NAME=Boost.Call_stack
 	    <doxygen:param>EXTRACT_ALL=YES
-            <doxygen:param>GENERATE_HTML=YES
+        <doxygen:param>GENERATE_HTML=YES
 	;

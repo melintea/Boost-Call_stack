@@ -8,7 +8,7 @@
 
 //[default
 /*`
-[h4 One-line usage]
+[h4 The one-line usage]
 One can simply use the defaults provided by the library.  In the example below, 
 the two steps (getting the stack and resolving its symbols) are collapsed into 
 one line:
