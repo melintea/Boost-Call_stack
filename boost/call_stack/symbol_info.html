@@ -30,23 +30,23 @@
   <span class="keyword">typedef</span> <span class="identifier">OutputFormatter</span> <a name="boost.call_stack.symbol_info.symbol_formatter_type"></a><span class="identifier">symbol_formatter_type</span><span class="special">;</span>
 
   <span class="comment">// <a class="link" href="symbol_info.html#boost.call_stack.symbol_infoconstruct-copy-destruct">construct/copy/destruct</a></span>
-  <a class="link" href="symbol_info.html#id329428-bb"><span class="identifier">symbol_info</span></a><span class="special">(</span><span class="keyword">const</span> <span class="identifier">address_type</span> <span class="special">&amp;</span> <span class="special">=</span> <span class="identifier">null_address</span><span class="special">)</span><span class="special">;</span>
-  <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> T<span class="special">&gt;</span> <a class="link" href="symbol_info.html#id329437-bb"><span class="identifier">symbol_info</span></a><span class="special">(</span><span class="keyword">const</span> <span class="identifier">T</span> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
-  <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> T<span class="special">&gt;</span> <a class="link" href="symbol_info.html#id329461-bb"><span class="identifier">symbol_info</span></a><span class="special">(</span><span class="keyword">const</span> <span class="identifier">T</span> <span class="special">*</span><span class="special">)</span><span class="special">;</span>
-  <a class="link" href="symbol_info.html#id329473-bb"><span class="identifier">symbol_info</span></a><span class="special">(</span><span class="keyword">const</span> <a class="link" href="symbol_info.html" title="Class template symbol_info">symbol_info</a> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
-  symbol_info&amp; <a class="link" href="symbol_info.html#id329482-bb"><span class="keyword">operator</span><span class="special">=</span></a><span class="special">(</span><a class="link" href="symbol_info.html" title="Class template symbol_info">symbol_info</a><span class="special">)</span><span class="special">;</span>
+  <a class="link" href="symbol_info.html#id293388-bb"><span class="identifier">symbol_info</span></a><span class="special">(</span><span class="keyword">const</span> <span class="identifier">address_type</span> <span class="special">&amp;</span> <span class="special">=</span> <span class="identifier">null_address</span><span class="special">)</span><span class="special">;</span>
+  <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> T<span class="special">&gt;</span> <a class="link" href="symbol_info.html#id293397-bb"><span class="identifier">symbol_info</span></a><span class="special">(</span><span class="keyword">const</span> <span class="identifier">T</span> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
+  <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> T<span class="special">&gt;</span> <a class="link" href="symbol_info.html#id293421-bb"><span class="identifier">symbol_info</span></a><span class="special">(</span><span class="keyword">const</span> <span class="identifier">T</span> <span class="special">*</span><span class="special">)</span><span class="special">;</span>
+  <a class="link" href="symbol_info.html#id293433-bb"><span class="identifier">symbol_info</span></a><span class="special">(</span><span class="keyword">const</span> <a class="link" href="symbol_info.html" title="Class template symbol_info">symbol_info</a> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
+  symbol_info&amp; <a class="link" href="symbol_info.html#id293442-bb"><span class="keyword">operator</span><span class="special">=</span></a><span class="special">(</span><a class="link" href="symbol_info.html" title="Class template symbol_info">symbol_info</a><span class="special">)</span><span class="special">;</span>
 
-  <span class="comment">// <a class="link" href="symbol_info.html#id329407-bb">public member functions</a></span>
-  <span class="keyword">void</span> <a class="link" href="symbol_info.html#id329409-bb"><span class="identifier">swap</span></a><span class="special">(</span><a class="link" href="symbol_info.html" title="Class template symbol_info">symbol_info</a> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
-  <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <a class="link" href="symbol_info.html#id329422-bb"><span class="identifier">as_string</span></a><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span>
+  <span class="comment">// <a class="link" href="symbol_info.html#id293367-bb">public member functions</a></span>
+  <span class="keyword">void</span> <a class="link" href="symbol_info.html#id293369-bb"><span class="identifier">swap</span></a><span class="special">(</span><a class="link" href="symbol_info.html" title="Class template symbol_info">symbol_info</a> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
+  <span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <a class="link" href="symbol_info.html#id293382-bb"><span class="identifier">as_string</span></a><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span>
 <span class="special">}</span><span class="special">;</span></pre></div>
 <div class="refsect1">
-<a name="id924654"></a><h2>Description</h2>
+<a name="id857595"></a><h2>Description</h2>
 <p>Binds together a <a class="link" href="symbol_resolver.html" title="Class template symbol_resolver">symbol_resolver</a> and a formatter for the symbol information.</p>
 <p>
 </p>
 <div class="refsect2">
-<a name="id924667"></a><h3>Template Parameters</h3>
+<a name="id857608"></a><h3>Template Parameters</h3>
 <div class="orderedlist"><ol class="orderedlist" type="1">
 <li class="listitem">
 <pre class="literallayout"><span class="keyword">typename</span> AddrResolver</pre>
@@ -59,31 +59,31 @@
 </ol></div>
 </div>
 <div class="refsect2">
-<a name="id924725"></a><h3>
+<a name="id857666"></a><h3>
 <a name="boost.call_stack.symbol_infoconstruct-copy-destruct"></a><code class="computeroutput">symbol_info</code> 
         public
        construct/copy/destruct</h3>
 <div class="orderedlist"><ol class="orderedlist" type="1">
-<li class="listitem"><pre class="literallayout"><a name="id329428-bb"></a><span class="identifier">symbol_info</span><span class="special">(</span><span class="keyword">const</span> <span class="identifier">address_type</span> <span class="special">&amp;</span> addr <span class="special">=</span> <span class="identifier">null_address</span><span class="special">)</span><span class="special">;</span></pre></li>
+<li class="listitem"><pre class="literallayout"><a name="id293388-bb"></a><span class="identifier">symbol_info</span><span class="special">(</span><span class="keyword">const</span> <span class="identifier">address_type</span> <span class="special">&amp;</span> addr <span class="special">=</span> <span class="identifier">null_address</span><span class="special">)</span><span class="special">;</span></pre></li>
 <li class="listitem">
-<pre class="literallayout"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> T<span class="special">&gt;</span> <a name="id329437-bb"></a><span class="identifier">symbol_info</span><span class="special">(</span><span class="keyword">const</span> <span class="identifier">T</span> <span class="special">&amp;</span> arg<span class="special">)</span><span class="special">;</span></pre>
+<pre class="literallayout"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> T<span class="special">&gt;</span> <a name="id293397-bb"></a><span class="identifier">symbol_info</span><span class="special">(</span><span class="keyword">const</span> <span class="identifier">T</span> <span class="special">&amp;</span> arg<span class="special">)</span><span class="special">;</span></pre>
 <p>Constructors on an arbitrary address of an object or a function. Not necessarily a good idea, use with care. The underlying platform resolver might be able to resolve the given address or not. </p>
 <p><span class="bold"><strong>See Also:</strong></span></p>
 <p>addressof. </p>
 <p>
 </p>
 </li>
-<li class="listitem"><pre class="literallayout"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> T<span class="special">&gt;</span> <a name="id329461-bb"></a><span class="identifier">symbol_info</span><span class="special">(</span><span class="keyword">const</span> <span class="identifier">T</span> <span class="special">*</span> arg<span class="special">)</span><span class="special">;</span></pre></li>
-<li class="listitem"><pre class="literallayout"><a name="id329473-bb"></a><span class="identifier">symbol_info</span><span class="special">(</span><span class="keyword">const</span> <a class="link" href="symbol_info.html" title="Class template symbol_info">symbol_info</a> <span class="special">&amp;</span> other<span class="special">)</span><span class="special">;</span></pre></li>
-<li class="listitem"><pre class="literallayout">symbol_info&amp; <a name="id329482-bb"></a><span class="keyword">operator</span><span class="special">=</span><span class="special">(</span><a class="link" href="symbol_info.html" title="Class template symbol_info">symbol_info</a> other<span class="special">)</span><span class="special">;</span></pre></li>
+<li class="listitem"><pre class="literallayout"><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> T<span class="special">&gt;</span> <a name="id293421-bb"></a><span class="identifier">symbol_info</span><span class="special">(</span><span class="keyword">const</span> <span class="identifier">T</span> <span class="special">*</span> arg<span class="special">)</span><span class="special">;</span></pre></li>
+<li class="listitem"><pre class="literallayout"><a name="id293433-bb"></a><span class="identifier">symbol_info</span><span class="special">(</span><span class="keyword">const</span> <a class="link" href="symbol_info.html" title="Class template symbol_info">symbol_info</a> <span class="special">&amp;</span> other<span class="special">)</span><span class="special">;</span></pre></li>
+<li class="listitem"><pre class="literallayout">symbol_info&amp; <a name="id293442-bb"></a><span class="keyword">operator</span><span class="special">=</span><span class="special">(</span><a class="link" href="symbol_info.html" title="Class template symbol_info">symbol_info</a> other<span class="special">)</span><span class="special">;</span></pre></li>
 </ol></div>
 </div>
 <div class="refsect2">
-<a name="id924972"></a><h3>
-<a name="id329407-bb"></a><code class="computeroutput">symbol_info</code> public member functions</h3>
+<a name="id857913"></a><h3>
+<a name="id293367-bb"></a><code class="computeroutput">symbol_info</code> public member functions</h3>
 <div class="orderedlist"><ol class="orderedlist" type="1">
-<li class="listitem"><pre class="literallayout"><span class="keyword">void</span> <a name="id329409-bb"></a><span class="identifier">swap</span><span class="special">(</span><a class="link" href="symbol_info.html" title="Class template symbol_info">symbol_info</a> <span class="special">&amp;</span> other<span class="special">)</span><span class="special">;</span></pre></li>
-<li class="listitem"><pre class="literallayout"><span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <a name="id329422-bb"></a><span class="identifier">as_string</span><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span></pre></li>
+<li class="listitem"><pre class="literallayout"><span class="keyword">void</span> <a name="id293369-bb"></a><span class="identifier">swap</span><span class="special">(</span><a class="link" href="symbol_info.html" title="Class template symbol_info">symbol_info</a> <span class="special">&amp;</span> other<span class="special">)</span><span class="special">;</span></pre></li>
+<li class="listitem"><pre class="literallayout"><span class="identifier">std</span><span class="special">::</span><span class="identifier">string</span> <a name="id293382-bb"></a><span class="identifier">as_string</span><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span></pre></li>
 </ol></div>
 </div>
 </div>
