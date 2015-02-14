@@ -293,7 +293,7 @@ struct sym_tab_type
     asection *                      text;
     bool                            dynamic;
     boost::shared_ptr< asymbol >    ptr;
-    long                            base; ///< module base address
+    bfd_vma                         base; ///< module base address
 
     sym_tab_type()
         : storage_needed(0)
@@ -351,7 +351,7 @@ public:
         return _shutdown();
     }
 
-    long compute_maps_base(const char * binfile)
+    bfd_vma compute_maps_base(const char * binfile)
     {
         pid_t pid = ::getpid();
         std::ifstream mapsFile("/proc/"+std::to_string(pid)+"/maps");
@@ -371,7 +371,7 @@ public:
                 std::string const base = "0x" + line.substr(0, loc);
                 std::stringstream sstream(base);
                 sstream.imbue(std::locale::classic());
-                long baseDecimal = 0;
+                bfd_vma baseDecimal = 0;
                 sstream >> std::hex >> baseDecimal;
                 return baseDecimal;
             }
