@@ -7,7 +7,9 @@ project
     : requirements
         <include>../../../..
         <library>/boost/thread//boost_thread
-        <define>BOOST_ALL_NO_LIB=1
+        <library>/boost/filesystem//boost_filesystem
+        <library>/boost/system//boost_system
+        #<define>BOOST_ALL_NO_LIB=1
         <threading>multi
         <link>static
 

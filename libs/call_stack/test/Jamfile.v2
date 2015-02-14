@@ -13,6 +13,8 @@ project
     : requirements
         <include>../../../..
         <library>/boost/thread//boost_thread
+        <library>/boost/filesystem//boost_filesystem
+        <library>/boost/system//boost_system
         <library>/boost/test//boost_unit_test_framework/<link>static 
         <define>BOOST_ALL_NO_LIB=1
         <threading>multi

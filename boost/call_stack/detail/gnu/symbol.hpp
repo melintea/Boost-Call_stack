@@ -26,6 +26,7 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/utility.hpp>
 #include <boost/static_assert.hpp>
+#include <boost/lexical_cast.hpp>
 #include <boost/assert.hpp>
 
 #include <execinfo.h>
@@ -354,7 +355,8 @@ public:
     bfd_vma compute_maps_base(const char * binfile)
     {
         pid_t pid = ::getpid();
-        std::ifstream mapsFile("/proc/"+std::to_string(pid)+"/maps");
+        std::string procFile = "/proc/" + boost::lexical_cast<std::string>(pid) + " /maps";
+        std::ifstream mapsFile(procFile.c_str());
         std::string line;
         std::string const filePath =
             boost::filesystem::canonical(binfile).string();
