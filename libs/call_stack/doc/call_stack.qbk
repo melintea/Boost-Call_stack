@@ -94,6 +94,8 @@ compiler include path, as well as the path to the [*Boost.Call_stack] headers.
     * [@http://www.boost.org/libs/thread/index.html Boost.Thread]
     * Boost.TypeTraits
     * Boost.Utility
+    * Boost.Filesystem
+    * Boost.System
 
 [h5 Platform specific]
 * Windows
