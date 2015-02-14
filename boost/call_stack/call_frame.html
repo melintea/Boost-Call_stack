@@ -3,7 +3,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
 <title>Class call_frame</title>
 <link rel="stylesheet" href="../../boostbook.css" type="text/css">
-<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
 <link rel="home" href="../../index.html" title="Chapter&#160;1.&#160;Boost.Call_stack">
 <link rel="up" href="../../header/boost/call_stack/frame_hpp.html" title="Header &lt;boost/call_stack/frame.hpp&gt;">
 <link rel="prev" href="../../header/boost/call_stack/frame_hpp.html" title="Header &lt;boost/call_stack/frame.hpp&gt;">
@@ -23,55 +23,52 @@
 <div xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="refsynopsisdiv"><pre class="synopsis"><span class="comment">// In header: &lt;<a class="link" href="../../header/boost/call_stack/frame_hpp.html" title="Header &lt;boost/call_stack/frame.hpp&gt;">boost/call_stack/frame.hpp</a>&gt;
 
 </span>
-<span class="keyword">class</span> <a class="link" href="call_frame.html" title="Class call_frame">call_frame</a> <span class="special">:</span> <span class="keyword">protected</span> <span class="identifier">call_frame_impl</span> <span class="special">{</span>
+<span class="keyword">class</span> <a class="link" href="call_frame.html" title="Class call_frame">call_frame</a> <span class="special">{</span>
 <span class="keyword">public</span><span class="special">:</span>
   <span class="comment">// <a class="link" href="call_frame.html#boost.call_stack.call_frameconstruct-copy-destruct">construct/copy/destruct</a></span>
-  <a class="link" href="call_frame.html#id292060-bb"><span class="identifier">call_frame</span></a><span class="special">(</span><span class="special">)</span><span class="special">;</span>
-  <a class="link" href="call_frame.html#id292061-bb"><span class="identifier">call_frame</span></a><span class="special">(</span><span class="keyword">const</span> <span class="identifier">call_frame_impl</span> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
-  <a class="link" href="call_frame.html#id292067-bb"><span class="identifier">call_frame</span></a><span class="special">(</span><span class="keyword">const</span> <a class="link" href="call_frame.html" title="Class call_frame">call_frame</a> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
-  call_frame&amp; <a class="link" href="call_frame.html#id292076-bb"><span class="keyword">operator</span><span class="special">=</span></a><span class="special">(</span><a class="link" href="call_frame.html" title="Class call_frame">call_frame</a><span class="special">)</span><span class="special">;</span>
+  <a class="link" href="call_frame.html#idm25728-bb"><span class="identifier">call_frame</span></a><span class="special">(</span><span class="special">)</span><span class="special">;</span>
+  <a class="link" href="call_frame.html#idm25600-bb"><span class="identifier">call_frame</span></a><span class="special">(</span><span class="keyword">const</span> <span class="identifier">call_frame_impl</span> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
+  <a class="link" href="call_frame.html#idm24784-bb"><span class="identifier">call_frame</span></a><span class="special">(</span><span class="keyword">const</span> <a class="link" href="call_frame.html" title="Class call_frame">call_frame</a> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
+  call_frame&amp; <a class="link" href="call_frame.html#idm23520-bb"><span class="keyword">operator</span><span class="special">=</span></a><span class="special">(</span><a class="link" href="call_frame.html" title="Class call_frame">call_frame</a><span class="special">)</span><span class="special">;</span>
 
-  <span class="comment">// <a class="link" href="call_frame.html#id292018-bb">public member functions</a></span>
-  <span class="keyword">void</span> <a class="link" href="call_frame.html#id292020-bb"><span class="identifier">swap</span></a><span class="special">(</span><a class="link" href="call_frame.html" title="Class call_frame">call_frame</a> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
-  <span class="keyword">const</span> <span class="identifier">address_type</span> <a class="link" href="call_frame.html#id292033-bb"><span class="identifier">addr</span></a><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span>
-  <span class="keyword">bool</span> <a class="link" href="call_frame.html#id292046-bb"><span class="keyword">operator</span><span class="special">==</span></a><span class="special">(</span><a class="link" href="call_frame.html" title="Class call_frame">call_frame</a> <span class="keyword">const</span> <span class="special">&amp;</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span>
+  <span class="comment">// <a class="link" href="call_frame.html#idm31760-bb">public member functions</a></span>
+  <span class="keyword">void</span> <a class="link" href="call_frame.html#idm31360-bb"><span class="identifier">swap</span></a><span class="special">(</span><a class="link" href="call_frame.html" title="Class call_frame">call_frame</a> <span class="special">&amp;</span><span class="special">)</span><span class="special">;</span>
+  <span class="keyword">const</span> <span class="identifier">address_type</span> <a class="link" href="call_frame.html#idm29424-bb"><span class="identifier">addr</span></a><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span>
+  <span class="keyword">bool</span> <a class="link" href="call_frame.html#idm27664-bb"><span class="keyword">operator</span><span class="special">==</span></a><span class="special">(</span><a class="link" href="call_frame.html" title="Class call_frame">call_frame</a> <span class="keyword">const</span> <span class="special">&amp;</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span>
 <span class="special">}</span><span class="special">;</span></pre></div>
 <div class="refsect1">
-<a name="id845073"></a><h2>Description</h2>
+<a name="idp6369472"></a><h2>Description</h2>
 <p>Platform agnostic call frame. </p>
 <div class="refsect2">
-<a name="id845079"></a><h3>
+<a name="idp6370144"></a><h3>
 <a name="boost.call_stack.call_frameconstruct-copy-destruct"></a><code class="computeroutput">call_frame</code> 
         public
        construct/copy/destruct</h3>
 <div class="orderedlist"><ol class="orderedlist" type="1">
-<li class="listitem"><pre class="literallayout"><a name="id292060-bb"></a><span class="identifier">call_frame</span><span class="special">(</span><span class="special">)</span><span class="special">;</span></pre></li>
-<li class="listitem"><pre class="literallayout"><a name="id292061-bb"></a><span class="identifier">call_frame</span><span class="special">(</span><span class="keyword">const</span> <span class="identifier">call_frame_impl</span> <span class="special">&amp;</span> frm<span class="special">)</span><span class="special">;</span></pre></li>
-<li class="listitem"><pre class="literallayout"><a name="id292067-bb"></a><span class="identifier">call_frame</span><span class="special">(</span><span class="keyword">const</span> <a class="link" href="call_frame.html" title="Class call_frame">call_frame</a> <span class="special">&amp;</span> other<span class="special">)</span><span class="special">;</span></pre></li>
-<li class="listitem"><pre class="literallayout">call_frame&amp; <a name="id292076-bb"></a><span class="keyword">operator</span><span class="special">=</span><span class="special">(</span><a class="link" href="call_frame.html" title="Class call_frame">call_frame</a> other<span class="special">)</span><span class="special">;</span></pre></li>
+<li class="listitem"><pre class="literallayout"><a name="idm25728-bb"></a><span class="identifier">call_frame</span><span class="special">(</span><span class="special">)</span><span class="special">;</span></pre></li>
+<li class="listitem"><pre class="literallayout"><a name="idm25600-bb"></a><span class="identifier">call_frame</span><span class="special">(</span><span class="keyword">const</span> <span class="identifier">call_frame_impl</span> <span class="special">&amp;</span> frm<span class="special">)</span><span class="special">;</span></pre></li>
+<li class="listitem"><pre class="literallayout"><a name="idm24784-bb"></a><span class="identifier">call_frame</span><span class="special">(</span><span class="keyword">const</span> <a class="link" href="call_frame.html" title="Class call_frame">call_frame</a> <span class="special">&amp;</span> other<span class="special">)</span><span class="special">;</span></pre></li>
+<li class="listitem"><pre class="literallayout">call_frame&amp; <a name="idm23520-bb"></a><span class="keyword">operator</span><span class="special">=</span><span class="special">(</span><a class="link" href="call_frame.html" title="Class call_frame">call_frame</a> other<span class="special">)</span><span class="special">;</span></pre></li>
 </ol></div>
 </div>
 <div class="refsect2">
-<a name="id845222"></a><h3>
-<a name="id292018-bb"></a><code class="computeroutput">call_frame</code> public member functions</h3>
+<a name="idp6392576"></a><h3>
+<a name="idm31760-bb"></a><code class="computeroutput">call_frame</code> public member functions</h3>
 <div class="orderedlist"><ol class="orderedlist" type="1">
-<li class="listitem"><pre class="literallayout"><span class="keyword">void</span> <a name="id292020-bb"></a><span class="identifier">swap</span><span class="special">(</span><a class="link" href="call_frame.html" title="Class call_frame">call_frame</a> <span class="special">&amp;</span> other<span class="special">)</span><span class="special">;</span></pre></li>
+<li class="listitem"><pre class="literallayout"><span class="keyword">void</span> <a name="idm31360-bb"></a><span class="identifier">swap</span><span class="special">(</span><a class="link" href="call_frame.html" title="Class call_frame">call_frame</a> <span class="special">&amp;</span> other<span class="special">)</span><span class="special">;</span></pre></li>
 <li class="listitem">
-<pre class="literallayout"><span class="keyword">const</span> <span class="identifier">address_type</span> <a name="id292033-bb"></a><span class="identifier">addr</span><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span></pre>
+<pre class="literallayout"><span class="keyword">const</span> <span class="identifier">address_type</span> <a name="idm29424-bb"></a><span class="identifier">addr</span><span class="special">(</span><span class="special">)</span> <span class="keyword">const</span><span class="special">;</span></pre>
 <p>
 </p>
-<div class="variablelist"><table border="0" class="variablelist compact">
-<colgroup>
+<div class="variablelist"><table border="0">
 <col align="left" valign="top">
-<col>
-</colgroup>
 <tbody><tr>
 <td><p><span class="term">Returns:</span></p></td>
 <td><p>an opaque address useable by symbol resolvers. </p></td>
 </tr></tbody>
 </table></div>
 </li>
-<li class="listitem"><pre class="literallayout"><span class="keyword">bool</span> <a name="id292046-bb"></a><span class="keyword">operator</span><span class="special">==</span><span class="special">(</span><a class="link" href="call_frame.html" title="Class call_frame">call_frame</a> <span class="keyword">const</span> <span class="special">&amp;</span> other<span class="special">)</span> <span class="keyword">const</span><span class="special">;</span></pre></li>
+<li class="listitem"><pre class="literallayout"><span class="keyword">bool</span> <a name="idm27664-bb"></a><span class="keyword">operator</span><span class="special">==</span><span class="special">(</span><a class="link" href="call_frame.html" title="Class call_frame">call_frame</a> <span class="keyword">const</span> <span class="special">&amp;</span> other<span class="special">)</span> <span class="keyword">const</span><span class="special">;</span></pre></li>
 </ol></div>
 </div>
 </div>

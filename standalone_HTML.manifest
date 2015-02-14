@@ -1,9 +1,10 @@
 index.html
+call_stack/contributors.html
 call_stack/intro.html
 call_stack/examples.html
 call_stack/users_guide.html
 call_stack/revision_history.html
-index/s06.html
+index/s07.html
 call_stack/reference.html
 boost/call_stack/default_max_depth.html
 boost/call_stack/init.html
@@ -27,4 +28,4 @@ boost/call_stack/null_symbol_resolver.html
 boost/call_stack/basic_symbol_resolver.html
 boost/call_stack/null_address.html
 boost/call_stack/null_delta.html
-boost/call_stack/addressof_id293568.html
+boost/call_stack/addressof_idp6795792.html
