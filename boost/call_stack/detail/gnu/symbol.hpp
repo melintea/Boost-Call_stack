@@ -20,6 +20,8 @@
 #include <boost/call_stack/detail/unique.hpp>
 #include <boost/call_stack/detail/singleton.hpp>
 
+#include <boost/algorithm/string/predicate.hpp>
+#include <boost/filesystem/operations.hpp>
 #include <boost/thread.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/utility.hpp>
@@ -46,6 +48,7 @@
 
 #include <memory>
 #include <iostream>
+#include <fstream>
 #include <string> 
 #include <map> 
 #include <sstream>
@@ -290,12 +293,14 @@ struct sym_tab_type
     asection *                      text;
     bool                            dynamic;
     boost::shared_ptr< asymbol >    ptr;
+    long                            base; ///< module base address
 
     sym_tab_type()
         : storage_needed(0)
         , cSymbols(0)
         , text(nullptr)
         , dynamic(false)
+        , base(0)
     {}
 };
 
@@ -346,6 +351,35 @@ public:
         return _shutdown();
     }
 
+    long compute_maps_base(const char * binfile)
+    {
+        pid_t pid = ::getpid();
+        std::ifstream mapsFile("/proc/"+std::to_string(pid)+"/maps");
+        std::string line;
+        std::string const filePath =
+            boost::filesystem::canonical(binfile).string();
+        int lineNo = 0;
+        while (std::getline(mapsFile, line))
+        {
+            if (boost::algorithm::ends_with(line, filePath))
+            {
+                if (lineNo == 0) // this is the executable itself
+                    return 0;
+                size_t const loc = line.find("-");
+                if (loc == std::string::npos)
+                    return 0;
+                std::string const base = "0x" + line.substr(0, loc);
+                std::stringstream sstream(base);
+                sstream.imbue(std::locale::classic());
+                long baseDecimal = 0;
+                sstream >> std::hex >> baseDecimal;
+                return baseDecimal;
+            }
+            lineNo++;
+        }
+        return 0;
+    }
+
     void resolve(const address_type&   addr,
                  const char *   binfile,
                  const char **  source_file_name,
@@ -372,12 +406,16 @@ public:
         if (itBfd == _syms.end()) {
             sym_tab_type fbfd;
 
+            fbfd.base = compute_maps_base(binfile);
+
             //FIXME: char *find_separate_debug_file (bfd *abfd);
             fbfd.abfd.reset(bfd_openr(binfile, 0), bfd_close_wrapper());
             if (!fbfd.abfd) {
                 return;
             }
+#ifdef BFD_DECOMPRESS // Old libbfd?
             fbfd.abfd->flags |= BFD_DECOMPRESS;
+#endif
 
             // Required
             bfd_check_format(fbfd.abfd.get(), bfd_object);
@@ -410,7 +448,7 @@ public:
 
             bfd_vma vma = bfd_get_section_vma(stab.abfd.get(), stab.text);
 
-            long offset = ((long)addr) - vma; //stab.text->vma;
+            long offset = ((long)addr) - stab.base - vma; //stab.text->vma;
             if (offset > 0) {
                 if ( !bfd_find_nearest_line(stab.abfd.get(),
                                             stab.text,
