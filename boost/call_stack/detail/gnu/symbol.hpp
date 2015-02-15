@@ -355,7 +355,7 @@ public:
     bfd_vma compute_maps_base(const char * binfile)
     {
         pid_t pid = ::getpid();
-        std::string procFile = "/proc/" + boost::lexical_cast<std::string>(pid) + " /maps";
+        std::string procFile = "/proc/" + boost::lexical_cast<std::string>(pid) + "/maps";
         std::ifstream mapsFile(procFile.c_str());
         std::string line;
         std::string const filePath =
