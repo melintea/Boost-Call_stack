@@ -358,8 +358,15 @@ public:
         std::string procFile = "/proc/" + boost::lexical_cast<std::string>(pid) + "/maps";
         std::ifstream mapsFile(procFile.c_str());
         std::string line;
+        
+        boost::system::error_code ec;
         std::string const filePath =
-            boost::filesystem::canonical(binfile).string();
+            boost::filesystem::canonical(binfile, ec).string();
+        if (ec)
+        {
+            filePath = std::string(binfile);
+        }            
+        
         int lineNo = 0;
         while (std::getline(mapsFile, line))
         {
