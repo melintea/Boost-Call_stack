@@ -360,7 +360,7 @@ public:
         std::string line;
         
         boost::system::error_code ec;
-        std::string const filePath =
+        std::string filePath =
             boost::filesystem::canonical(binfile, ec).string();
         if (ec)
         {
