@@ -1,5 +1,5 @@
 /*
- *  Copyright 2013 Aurelian Melinte. 
+ *  Copyright 2013 Aurelian Melinte.
  *
  *  Use, modification and distribution are subject to the Boost Software License,
  *  Version 1.0. (See accompanying file LICENSE_1_0.txt or copy at
@@ -29,6 +29,7 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/assert.hpp>
 
+#include <elf.h>
 #include <execinfo.h>
 #include <cxxabi.h>
 #include <dlfcn.h>
@@ -50,15 +51,15 @@
 #include <memory>
 #include <iostream>
 #include <fstream>
-#include <string> 
-#include <map> 
+#include <string>
+#include <map>
 #include <sstream>
 #include <algorithm>
 
 
 /*
  *
- */ 
+ */
 
 namespace boost { namespace call_stack { namespace detail {
 
@@ -356,23 +357,24 @@ public:
     {
         pid_t pid = ::getpid();
         std::string procFile = "/proc/" + boost::lexical_cast<std::string>(pid) + "/maps";
-        std::ifstream mapsFile(procFile.c_str());
+        std::ifstream proc_maps_file(procFile.c_str());
         std::string line;
-        
+
         boost::system::error_code ec;
-        std::string filePath =
+        std::string executable_file_path =
             boost::filesystem::canonical(binfile, ec).string();
         if (ec)
         {
-            filePath = std::string(binfile);
-        }            
-        
-        int lineNo = 0;
-        while (std::getline(mapsFile, line))
+            executable_file_path = std::string(binfile);
+        }
+
+        int line_no = 0;
+        while (std::getline(proc_maps_file, line))
         {
-            if (boost::algorithm::ends_with(line, filePath))
+            if (boost::algorithm::ends_with(line, executable_file_path))
             {
-                if (lineNo == 0) // this is the executable itself
+                // this is the executable itself and we don't have a position independent executable
+                if (line_no == 0 && !is_position_independent_executable(executable_file_path))
                     return 0;
                 size_t const loc = line.find("-");
                 if (loc == std::string::npos)
@@ -380,13 +382,39 @@ public:
                 std::string const base = "0x" + line.substr(0, loc);
                 std::stringstream sstream(base);
                 sstream.imbue(std::locale::classic());
-                bfd_vma baseDecimal = 0;
-                sstream >> std::hex >> baseDecimal;
-                return baseDecimal;
+                bfd_vma base_decimal = 0;
+                sstream >> std::hex >> base_decimal;
+                return base_decimal;
             }
-            lineNo++;
+            line_no++;
         }
         return 0;
+    }
+
+    bool is_position_independent_executable(std::string const& executable_file_path)
+    {
+        static bool s_first_time = true;
+        static std::string s_executable_file_path;
+        static bool s_is_position_independent_executable;
+        if (!s_first_time)
+        {
+            assert(s_executable_file_path == executable_file_path);
+            return s_is_position_independent_executable;
+        }
+        s_first_time = false;
+        s_executable_file_path = executable_file_path;
+        std::ifstream executable_file;
+        executable_file.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+        executable_file.open(executable_file_path);
+        Elf64_Ehdr elfHeader;
+        executable_file.read(reinterpret_cast<char*>(&elfHeader), sizeof(elfHeader));
+        // check so if it is really an elf file
+        if (::memcmp(elfHeader.e_ident, ELFMAG, SELFMAG) != 0)
+        {
+            throw std::runtime_error(
+                "Unsupported non-ELF format found for the executable '" + executable_file_path + "'");
+        }
+        return elfHeader.e_type == ET_DYN;
     }
 
     void resolve(const address_type&   addr,
