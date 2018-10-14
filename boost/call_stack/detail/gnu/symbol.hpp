@@ -406,15 +406,15 @@ public:
         std::ifstream executable_file;
         executable_file.exceptions(std::ifstream::failbit | std::ifstream::badbit);
         executable_file.open(executable_file_path);
-        Elf64_Ehdr elfHeader;
-        executable_file.read(reinterpret_cast<char*>(&elfHeader), sizeof(elfHeader));
-        // check so if it is really an elf file
-        if (::memcmp(elfHeader.e_ident, ELFMAG, SELFMAG) != 0)
+        Elf64_Ehdr elf_header;
+        executable_file.read(reinterpret_cast<char*>(&elf_header), sizeof(elf_header));
+        // check if it is really an elf file
+        if (::memcmp(elf_header.e_ident, ELFMAG, SELFMAG) != 0)
         {
             throw std::runtime_error(
                 "Unsupported non-ELF format found for the executable '" + executable_file_path + "'");
         }
-        return elfHeader.e_type == ET_DYN;
+        return elf_header.e_type == ET_DYN;
     }
 
     void resolve(const address_type&   addr,
