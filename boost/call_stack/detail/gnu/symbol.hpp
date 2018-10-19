@@ -308,6 +308,8 @@ struct sym_tab_type
 
 typedef std::map<std::string, sym_tab_type> sym_map_type;
 
+// Map modules to their base addresses
+typedef std::map<std::string, bfd_vma> bfd_vma_map_type;
 
 struct bfd_close_wrapper
 {
@@ -330,6 +332,7 @@ public:
 
     library()
         : _init_called(false)
+        , _is_pie(false)
     {
         bool ret = init();
         BOOST_ASSERT(ret);
@@ -347,74 +350,25 @@ public:
         return _init();
     }
 
+    // This resolver could return stale data with the following scenario:
+    // - program loads module dynamically with libdl(3lib) API
+    // - check call stack with functions from module on the stack
+    // - program unloads module -> stale data in the _vmas map
+    // - program loads module again at new base address
+    // - check call stack with functions from module on the stack find stale vma
+    // Same issue is possible with cached symbol data in _syms.
+    // For such situations, use bfd::bfd_lib_type::instance().flush_cached_data();
+    void flush_cached_data()
+    {
+        boost::mutex::scoped_lock lock(_lib_mutex);
+        _syms.clear();
+        _vmas.clear();
+    }
+
     bool shutdown()
     {
         boost::mutex::scoped_lock lock(_lib_mutex);
         return _shutdown();
-    }
-
-    bfd_vma compute_maps_base(const char * binfile)
-    {
-        pid_t pid = ::getpid();
-        std::string procFile = "/proc/" + boost::lexical_cast<std::string>(pid) + "/maps";
-        std::ifstream proc_maps_file(procFile.c_str());
-        std::string line;
-
-        boost::system::error_code ec;
-        std::string executable_file_path =
-            boost::filesystem::canonical(binfile, ec).string();
-        if (ec)
-        {
-            executable_file_path = std::string(binfile);
-        }
-
-        int line_no = 0;
-        while (std::getline(proc_maps_file, line))
-        {
-            if (boost::algorithm::ends_with(line, executable_file_path))
-            {
-                // this is the executable itself and we don't have a position independent executable
-                if (line_no == 0 && !is_position_independent_executable(executable_file_path))
-                    return 0;
-                size_t const loc = line.find("-");
-                if (loc == std::string::npos)
-                    return 0;
-                std::string const base = "0x" + line.substr(0, loc);
-                std::stringstream sstream(base);
-                sstream.imbue(std::locale::classic());
-                bfd_vma base_decimal = 0;
-                sstream >> std::hex >> base_decimal;
-                return base_decimal;
-            }
-            line_no++;
-        }
-        return 0;
-    }
-
-    bool is_position_independent_executable(std::string const& executable_file_path)
-    {
-        static bool s_first_time = true;
-        static std::string s_executable_file_path;
-        static bool s_is_position_independent_executable;
-        if (!s_first_time)
-        {
-            assert(s_executable_file_path == executable_file_path);
-            return s_is_position_independent_executable;
-        }
-        s_first_time = false;
-        s_executable_file_path = executable_file_path;
-        std::ifstream executable_file;
-        executable_file.exceptions(std::ifstream::failbit | std::ifstream::badbit);
-        executable_file.open(executable_file_path);
-        Elf64_Ehdr elf_header;
-        executable_file.read(reinterpret_cast<char*>(&elf_header), sizeof(elf_header));
-        // check if it is really an elf file
-        if (::memcmp(elf_header.e_ident, ELFMAG, SELFMAG) != 0)
-        {
-            throw std::runtime_error(
-                "Unsupported non-ELF format found for the executable '" + executable_file_path + "'");
-        }
-        return elf_header.e_type == ET_DYN;
     }
 
     void resolve(const address_type&   addr,
@@ -443,7 +397,7 @@ public:
         if (itBfd == _syms.end()) {
             sym_tab_type fbfd;
 
-            fbfd.base = compute_maps_base(binfile);
+            fbfd.base = _compute_maps_base(binfile);
 
             //FIXME: char *find_separate_debug_file (bfd *abfd);
             fbfd.abfd.reset(bfd_openr(binfile, 0), bfd_close_wrapper());
@@ -528,17 +482,106 @@ private:
         }
 
         _syms.clear();
+        _vmas.clear();
         //No couterparty to bfd_init()
 
         _init_called = false;
         return true;
     }
 
+    // Ubuntu 18.04 with PIE-compiled programs
+    bool _is_position_independent_executable(std::string const& executable_file_path)
+    {
+        static bool s_first_time = true;
+        static std::string s_executable_file_path;
+
+        if (!s_first_time)
+        {
+            assert(s_executable_file_path == executable_file_path);
+            return _is_pie;
+        }
+
+        s_first_time = false;
+        s_executable_file_path = executable_file_path;
+
+        std::ifstream executable_file;
+        executable_file.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+        executable_file.open(executable_file_path);
+
+        Elf64_Ehdr elf_header;
+        executable_file.read(reinterpret_cast<char*>(&elf_header), sizeof(elf_header));
+        // check if it is really an elf file
+        if (::memcmp(elf_header.e_ident, ELFMAG, SELFMAG) != 0)
+        {
+            throw std::runtime_error(
+                "Unsupported non-ELF format found for the executable '" + executable_file_path + "'");
+        }
+
+        _is_pie = (elf_header.e_type == ET_DYN);
+        return _is_pie;
+    }
+
+    // Must run under _lib_mutex because of _vmas
+    bfd_vma _compute_maps_base(const char * binfile)
+    {
+        boost::system::error_code ec;
+        std::string executable_file_path =
+            boost::filesystem::canonical(binfile, ec).string();
+        if (ec)
+        {
+            executable_file_path = std::string(binfile);
+        }
+
+        bfd_vma_map_type:const_iterator itVma = _vmas.find(executable_file_path);
+        if (itVma != _vmas.end())
+        {
+            return itVma->second;
+        }
+
+        pid_t pid = ::getpid();
+        std::string procFile = "/proc/" + boost::lexical_cast<std::string>(pid) + "/maps";
+        std::ifstream proc_maps_file(procFile.c_str());
+        std::string line;
+
+        int line_no = 0;
+        while (std::getline(proc_maps_file, line))
+        {
+            if (boost::algorithm::ends_with(line, executable_file_path))
+            {
+                // this is the executable itself and we don't have a position independent executable
+                if (line_no == 0 && !_is_position_independent_executable(executable_file_path))
+                {
+                    _vmas[executable_file_path] = 0;
+                    return 0;
+                }
+
+                size_t const loc = line.find("-");
+                if (loc == std::string::npos)
+                {
+                    _vmas[executable_file_path] = 0;
+                    return 0;
+                }
+
+                std::string const base = "0x" + line.substr(0, loc);
+                std::stringstream sstream(base);
+                sstream.imbue(std::locale::classic());
+                bfd_vma base_decimal = 0;
+                sstream >> std::hex >> base_decimal;
+                _vmas[executable_file_path] = base_decimal;
+                return base_decimal;
+            }
+            line_no++;
+        }
+        return 0;
+    }
+
 private:
 
-    boost::mutex    _lib_mutex;
-    bool            _init_called;
-    sym_map_type    _syms;
+    boost::mutex     _lib_mutex;
+    bool             _init_called;
+    bool             _is_pie; // Ubuntu 18.04 with PIE-compiled programs
+    sym_map_type     _syms;
+    bfd_vma_map_type _vmas;
 };
 
 typedef lpt::singleton<bfd::library> bfd_lib_type;
@@ -563,7 +606,7 @@ public:
     friend void swap(source_resolver& left, source_resolver& right)
     {
         std::swap(left._source_file_name, right._source_file_name);
-        std::swap(left._sym_name,        right._sym_name);
+        std::swap(left._sym_name,         right._sym_name);
         std::swap(left._line_number,      right._line_number);
     }
 
