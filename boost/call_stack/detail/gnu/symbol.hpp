@@ -506,7 +506,7 @@ private:
 
         std::ifstream executable_file;
         executable_file.exceptions(std::ifstream::failbit | std::ifstream::badbit);
-        executable_file.open(executable_file_path);
+        executable_file.open(executable_file_path.c_str());
 
         Elf64_Ehdr elf_header;
         executable_file.read(reinterpret_cast<char*>(&elf_header), sizeof(elf_header));
@@ -532,7 +532,7 @@ private:
             executable_file_path = std::string(binfile);
         }
 
-        bfd_vma_map_type:const_iterator itVma = _vmas.find(executable_file_path);
+        bfd_vma_map_type::const_iterator itVma = _vmas.find(executable_file_path);
         if (itVma != _vmas.end())
         {
             return itVma->second;
