@@ -437,7 +437,8 @@ public:
         if (itBfd != _syms.end()) {
             const sym_tab_type &stab = itBfd->second;
 
-            bfd_vma vma = bfd_get_section_vma(stab.abfd.get(), stab.text);
+            //bfd_vma vma = bfd_get_section_vma(stab.abfd.get(), stab.text); //older bfd
+            bfd_vma vma = bfd_section_vma(stab.text);
 
             long offset = ((long)addr) - stab.base - vma; //stab.text->vma;
             if (offset > 0) {
