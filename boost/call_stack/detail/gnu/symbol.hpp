@@ -409,7 +409,7 @@ public:
 
         sym_map_type::iterator itBfd = _syms.find(binfile);
         if (itBfd == _syms.end()) {
-            sym_tab_type fbfd;
+            sym_tab_type fbfd = {0};
 
             fbfd.base = _compute_maps_base(binfile);
 
@@ -423,9 +423,14 @@ public:
 #endif
 
             // Required
-            bfd_check_format(fbfd.abfd.get(), bfd_object);
+            if ( ! bfd_check_format(fbfd.abfd.get(), bfd_object)) {
+                return;
+            }
 
             fbfd.text = bfd_get_section_by_name(fbfd.abfd.get(), ".text");
+            if ( ! fbfd.text) {
+                return;
+            }
 
             fbfd.storage_needed = bfd_get_symtab_upper_bound(fbfd.abfd.get());
             if (0 == fbfd.storage_needed) {
@@ -455,14 +460,14 @@ public:
             
             long offset = ((long)addr) - stab.base - vma; //stab.text->vma;
             if (offset > 0) {
-                if ( !bfd_find_nearest_line(stab.abfd.get(),
-                                            stab.text,
-                                            stab.syms.get(),
-                                            offset,
-                                            source_file_name,
-                                            func_name,
-                                            line_number)
-                    ) {
+                bool found = bfd_find_nearest_line(stab.abfd.get(),
+                                                   stab.text,
+                                                   stab.syms.get(),
+                                                   offset,
+                                                   source_file_name,
+                                                   func_name,
+                                                   line_number);
+                if ( ! found) {
                     //std::cerr << "libbfd: could not find " << std::hex << addr;
                     *source_file_name = nullptr;
                     *line_number      = 0;
