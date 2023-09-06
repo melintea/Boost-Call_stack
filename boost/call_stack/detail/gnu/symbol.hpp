@@ -77,6 +77,20 @@ static delta_type            null_delta = delta_type(0);
 /*
  *
  */
+
+// Choose between bfd_get_section_vma() of older bfd API and bfd_section_vma()
+template <typename BFD, typename ASECTION>
+auto bfd_get_section_vma_wrapper(BFD *abfd, const ASECTION *section) -> decltype(bfd_get_section_vma((BFD*)0, nullptr))
+{
+    return bfd_get_section_vma(abfd, section);
+}
+
+template <typename BFD, typename ASECTION>
+auto bfd_get_section_vma_wrapper(BFD *abfd, const ASECTION *section) -> decltype(bfd_section_vma((ASECTION*)0))
+{
+    return bfd_section_vma(section);
+}
+
 template <typename T>
 struct free_wrapper
 {
@@ -437,9 +451,8 @@ public:
         if (itBfd != _syms.end()) {
             const sym_tab_type &stab = itBfd->second;
 
-            //bfd_vma vma = bfd_get_section_vma(stab.abfd.get(), stab.text); //older bfd
-            bfd_vma vma = bfd_section_vma(stab.text);
-
+            bfd_vma vma = bfd_get_section_vma_wrapper(stab.abfd.get(), stab.text);
+            
             long offset = ((long)addr) - stab.base - vma; //stab.text->vma;
             if (offset > 0) {
                 if ( !bfd_find_nearest_line(stab.abfd.get(),
