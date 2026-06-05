@@ -1,5 +1,5 @@
 Boost.Call_stack: a collection of call stack utilities built around http://www.boost.org. 
-[N3441](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2012/n3441.html) implementation.
+[N3441 implementation](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2012/n3441.html).
 
 Disclaimer: this is not part of the boost libraries collection.
 
